@@ -111,7 +111,7 @@ class ResultScreen extends StatelessWidget {
               height: 199.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: const AssetImage('assets/images/pic 1.jpg'),
+                  image: const AssetImage('assets\images\pic 1.jpg'),
                   fit: BoxFit.fill,
                 ),
               ),

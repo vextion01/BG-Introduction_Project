@@ -5,8 +5,10 @@ import 'package:adobe_xd/page_link.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashScreen extends StatelessWidget {
+  final ImageProvider logo;
   SplashScreen({
     Key? key,
+    this.logo = const AssetImage('assets\images\logo.png'),
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -30,76 +32,81 @@ class SplashScreen extends StatelessWidget {
           Pinned.fromPins(
             Pin(start: 10.0, end: 9.0),
             Pin(size: 206.0, middle: 0.3088),
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/pic 1.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
-          Pinned.fromPins(
-            Pin(size: 96.0, middle: 0.5),
-            Pin(size: 27.0, end: 50.0),
-            child: Text(
-              'Version 1.0',
-              style: TextStyle(
-                fontFamily: 'Segoe UI',
-                fontSize: 20,
-                color: const Color(0xfffff5f5),
-              ),
-              softWrap: false,
-            ),
-          ),
-          Pinned.fromPins(
-            Pin(size: 200.0, end: 51.0),
-            Pin(size: 50.0, middle: 0.6814),
             child: PageLink(
               links: [
                 PageLinkInfo(
+                  transition: LinkTransition.Fade,
                   ease: Curves.easeOut,
                   duration: 0.3,
                   pageBuilder: () => MianScreen(),
                 ),
               ],
-              child: Stack(
-                children: <Widget>[
-                  SizedBox.expand(
-                      child: SvgPicture.string(
-                    _svg_lf64be,
-                    allowDrawingOutsideViewBox: true,
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: logo,
                     fit: BoxFit.fill,
-                  )),
-                  SingleChildScrollView(
-                    primary: false,
-                    child: SizedBox(
-                      width: 132.0,
-                      height: 27.0,
-                      child: Stack(
-                        children: <Widget>[
-                          Pinned.fromPins(
-                            Pin(start: 0.0, end: 68.0),
-                            Pin(size: 27.0, middle: 0.0),
-                            child: Text(
-                              'ค้นหาบอร์ดเกม',
-                              style: TextStyle(
-                                fontFamily: 'Tahoma',
-                                fontSize: 20,
-                                color: const Color(0xff000000),
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                   ),
-                ],
+                ),
               ),
             ),
           ),
+          buildGroup1(context),
         ],
+      ),
+    );
+  }
+
+  Widget buildGroup1(context) {
+    return Align(
+      alignment: Alignment(0.0, 0.492),
+      child: SizedBox(
+        width: 200.0,
+        height: 50.0,
+        child: PageLink(
+          links: [
+            PageLinkInfo(
+              transition: LinkTransition.Fade,
+              ease: Curves.easeOut,
+              duration: 0.3,
+              pageBuilder: () => MianScreen(),
+            ),
+          ],
+          child: Stack(
+            children: <Widget>[
+              SizedBox.expand(
+                  child: SvgPicture.string(
+                _svg_lf64be,
+                allowDrawingOutsideViewBox: true,
+                fit: BoxFit.fill,
+              )),
+              SingleChildScrollView(
+                primary: false,
+                child: SizedBox(
+                  width: 132.0,
+                  height: 27.0,
+                  child: Stack(
+                    children: <Widget>[
+                      Pinned.fromPins(
+                        Pin(start: 0.0, end: 68.0),
+                        Pin(size: 27.0, middle: 0.0),
+                        child: Text(
+                          'board game',
+                          style: TextStyle(
+                            fontFamily: 'Tahoma',
+                            fontSize: 20,
+                            color: const Color(0xff000000),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
