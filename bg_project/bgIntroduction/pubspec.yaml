@@ -30,7 +30,6 @@ dependencies:
   flutter:
     sdk: flutter
   adobe_xd: ^2.0.0
-  #flutter_launcher_icons: "^0.7.3"
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -58,6 +57,15 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/images/picname_1.jpg
+    - assets/images/logo.png
+
+  # fonts:
+  #   - family: tahomo
+  #     fonts: 
+  #       - assets: asset\fonts\tahomo.ttf
+  #         weight: 100
   
   # To add assets to your application, add an assets section, like this:
   # assets:
