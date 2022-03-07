@@ -1,11 +1,15 @@
+import 'package:bg_introducetion/info_screen.dart';
+import 'package:bg_introducetion/result_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import './mian_screen.dart';
 import 'package:adobe_xd/page_link.dart';
 import './search_by_name_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class InsertNameScreen extends StatelessWidget {
+
   InsertNameScreen({
     Key? key,
   }) : super(key: key);
@@ -127,61 +131,9 @@ class InsertNameScreen extends StatelessWidget {
               ],
             ),
           ),
-          Pinned.fromPins(
-            Pin(size: 200.0, middle: 0.5),
-            Pin(size: 50.0, end: 39.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.Fade,
-                  ease: Curves.easeOut,
-                  duration: 0.3,
-                  pageBuilder: () => SearchByNameScreen(),
-                ),
-              ],
-              child: Stack(
-                children: <Widget>[
-                  SizedBox.expand(
-                      child: SvgPicture.string(
-                    _svg_cufs1w,
-                    allowDrawingOutsideViewBox: true,
-                    fit: BoxFit.fill,
-                  )),
-                  Stack(
-                    children: <Widget>[
-                      SizedBox(
-                        width: 200.0,
-                        height: 50.0,
-                        child: SvgPicture.string(
-                          _svg_uor7i4,
-                          allowDrawingOutsideViewBox: true,
-                        ),
-                      ),
-                      Transform.translate(
-                        offset: Offset(34.0, 14.0),
-                        child: SizedBox(
-                          width: 132.0,
-                          child: Text(
-                            'ค้นหาบอร์ดเกม',
-                            style: TextStyle(
-                              fontFamily: 'tahomo',
-                              fontSize: 20,
-                              color: const Color(0xff000000),
-                              fontWeight: FontWeight.w500,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Pinned.fromPins(
-            Pin(size: 30.2, end: 9.0),
-            Pin(size: 23.5, end: 7.5),
+           Pinned.fromPins(
+            Pin(start: 90.0, end: 90.0),
+            Pin(size: 50.0, middle: 0.875),
             child: PageLink(
               links: [
                 PageLinkInfo(
@@ -191,23 +143,184 @@ class InsertNameScreen extends StatelessWidget {
                   pageBuilder: () => MianScreen(),
                 ),
               ],
-              child: Stack(
-                children: <Widget>[
-                  SizedBox.expand(
-                      child: SvgPicture.string(
-                    _svg_hvzkpc,
-                    allowDrawingOutsideViewBox: true,
-                    fit: BoxFit.fill,
-                  )),
+              child: AppBar(
+                backgroundColor: const Color(0xffe38f00),
+                actions: [
+                  IconButton(onPressed: () {
+                    showSearch(
+                      context: context,
+                      delegate: CustomSearchDelegate(),
+                    );
+                  }, 
+                  icon: const Icon(Icons.search),
+                  ),
                 ],
-              ),
+              )
+              
             ),
           ),
+          // Pinned.fromPins(
+          //   Pin(size: 200.0, middle: 0.5),
+          //   Pin(size: 50.0, end: 39.0),
+          //   child: PageLink(
+          //     links: [
+          //       PageLinkInfo(
+          //         transition: LinkTransition.Fade,
+          //         ease: Curves.easeOut,
+          //         duration: 0.3,
+          //         pageBuilder: () => SearchByNameScreen(),
+          //       ),
+          //     ],
+          //     child: Stack(
+          //       children: <Widget>[
+          //         SizedBox.expand(
+          //             child: SvgPicture.string(
+          //           _svg_cufs1w,
+          //           allowDrawingOutsideViewBox: true,
+          //           fit: BoxFit.fill,
+          //         )),
+          //         Stack(
+          //           children: <Widget>[
+          //             SizedBox(
+          //               width: 200.0,
+          //               height: 50.0,
+          //               child: SvgPicture.string(
+          //                 _svg_uor7i4,
+          //                 allowDrawingOutsideViewBox: true,
+          //               ),
+          //             ),
+          //             Transform.translate(
+          //               offset: Offset(34.0, 14.0),
+          //               child: SizedBox(
+          //                 width: 132.0,
+          //                 child: Text(
+          //                   'ค้นหาบอร์ดเกม',
+          //                   style: TextStyle(
+          //                     fontFamily: 'tahomo',
+          //                     fontSize: 20,
+          //                     color: const Color(0xff000000),
+          //                     fontWeight: FontWeight.w500,
+          //                   ),
+          //                   textAlign: TextAlign.center,
+          //                 ),
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          // Pinned.fromPins(
+          //   Pin(size: 30.2, end: 9.0),
+          //   Pin(size: 23.5, end: 7.5),
+          //   child: PageLink(
+          //     links: [
+          //       PageLinkInfo(
+          //         transition: LinkTransition.Fade,
+          //         ease: Curves.easeOut,
+          //         duration: 0.3,
+          //         pageBuilder: () => SearchByNameScreen(),
+          //       ),
+          //     ],
+          //     child: Stack(
+          //       children: <Widget>[
+          //         SizedBox.expand(
+          //             child: SvgPicture.string(
+          //           _svg_hvzkpc,
+          //           allowDrawingOutsideViewBox: true,
+          //           fit: BoxFit.fill,
+          //         )),
+          //       ],
+          //     ), 
+          //   ),
+          // ),
         ],
       ),
     );
   }
 }
+
+
+class CustomSearchDelegate extends SearchDelegate {
+  CollectionReference _firebaseFirestore =
+      FirebaseFirestore.instance.collection("DataBG");
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return <Widget>[
+      IconButton(
+        icon: Icon(Icons.close),
+        onPressed: () {
+          query = "";
+        },
+      ),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: _firebaseFirestore.snapshots().asBroadcastStream(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshort) {
+        if(!snapshort.hasData){
+          return Center(child: CircularProgressIndicator());
+        }
+        else{
+          
+          if(snapshort.data!.docs.where((QueryDocumentSnapshot<Object?> element) => element['nameBoardGame']
+              .toString()
+              .toLowerCase()
+              .contains(query.toLowerCase())).isEmpty){
+                return Center(child: Text("No search query found"),);
+              }
+
+          else {
+            return ListView(
+            children: [
+              ...snapshort.data!.docs.where((QueryDocumentSnapshot<Object?> element) => element['nameBoardGame']
+              .toString()
+              .toLowerCase()
+              .contains(query.toLowerCase())).map((QueryDocumentSnapshot<Object?> data) {
+
+                final String nameBG = data.get('nameBoardGame');
+                final String image = data['boardgameimages'];
+                final String name = data['typeBoardGame'];
+
+                return ListTile(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Resultinfo(data: data,)));
+                  },
+                  title: Text(nameBG),
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage(image),
+                    ),
+                    subtitle: Text(name),
+                );
+
+              })
+            ]);
+          }
+        }
+      });
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    return Center(child: Text("Search anything here"),);
+  }
+}
+
 
 const String _svg_z8latu =
     '<svg viewBox="0.0 0.0 360.0 56.0" ><path  d="M 0 0 L 360 0 L 360 56 L 0 56 L 0 0 Z" fill="#e18721" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';

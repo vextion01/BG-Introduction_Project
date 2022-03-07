@@ -5,6 +5,11 @@ import 'package:adobe_xd/page_link.dart';
 import './info_screen.dart';
 import './result_screen_new_random.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '/TestFireBase/randomData.dart';
+import 'dart:math';
 
 class ResultScreen extends StatelessWidget {
   ResultScreen({
@@ -59,7 +64,7 @@ class ResultScreen extends StatelessWidget {
             Pin(size: 27.0, middle: 0.5563),
             child: Stack(
               children: <Widget>[
-                Align(
+                const Align(
                   alignment: Alignment(0.069, -1.0),
                   child: SizedBox(
                     width: 72.0,
@@ -69,7 +74,7 @@ class ResultScreen extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'tahomo',
                         fontSize: 20,
-                        color: const Color(0xfffff5f5),
+                        color: Color(0xfffff5f5),
                         fontWeight: FontWeight.w500,
                       ),
                       softWrap: false,
@@ -96,9 +101,9 @@ class ResultScreen extends StatelessWidget {
               child: Stack(
                 children: <Widget>[
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: const AssetImage('assets/images/picname1.jpg'),
+                        image: AssetImage('assets/images/picname1.jpg'),
                         fit: BoxFit.fill,
                       ),
                     ),

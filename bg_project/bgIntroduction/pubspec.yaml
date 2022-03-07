@@ -35,6 +35,9 @@ dependencies:
   firebase_auth: ^3.3.9
   cloud_firestore: ^3.1.10
   html: ^0.15.0
+  google_fonts: ^2.3.1
+  url_launcher: ^6.0.3
+  
 
 
 
@@ -67,6 +70,12 @@ flutter:
   assets:
     - assets/images/picname_1.jpg
     - assets/images/logo.png
+
+  fonts:
+    - family: tahomo
+      fonts:
+        - asset: fonts/tahomo.ttf
+
 
   # fonts:
   #   - family: tahomo

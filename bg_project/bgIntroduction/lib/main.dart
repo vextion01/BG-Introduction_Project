@@ -3,17 +3,24 @@ import 'package:bg_introducetion/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:math';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    // Replace with actual values
-    options: FirebaseOptions(
-      apiKey: "AIzaSyBgNZ5HwqP8QIIYE4vylJaBi60t-oR1O94",
-      appId: "1:593533535477:android:bb49e793e8e54bdc84b1bc",
-      messagingSenderId: "593533535477",
-      projectId: "bg-introduction-3aade",
-    ),
+    options: const FirebaseOptions(
+        apiKey: "AIzaSyBgNZ5HwqP8QIIYE4vylJaBi60t-oR1O94",
+        authDomain: "bg-introduction-3aade.firebaseapp.com",
+        databaseURL:
+            "https://bg-introduction-3aade-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "bg-introduction-3aade",
+        storageBucket: "bg-introduction-3aade.appspot.com",
+        messagingSenderId: "593533535477",
+        appId: "1:593533535477:web:c07a64b0a410954d84b1bc",
+        measurementId: "G-70KQKL9Q8J"),
   );
   runApp(MyApp());
 }
@@ -56,48 +63,4 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// class MyHomePage extends StatefulWidget {
-//   const MyHomePage({Key? key, required this.title}) : super(key: key);
-//   final String title;
 
-//   @override
-//   State<MyHomePage> createState() => _MyHomePageState();
-// }
-
-// class _MyHomePageState extends State<MyHomePage> {
-//   int _counter = 0;
-
-//   void _incrementCounter() {
-//     setState(() {
-//       _counter++;
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(widget.title),
-//       ),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             const Text(
-//               'You have pushed the button this many times:',
-//             ),
-//             Text(
-//               '$_counter',
-//               style: Theme.of(context).textTheme.headline4,
-//             ),
-//           ],
-//         ),
-//       ),
-//       floatingActionButton: FloatingActionButton(
-//         onPressed: _incrementCounter,
-//         tooltip: 'Increment',
-//         child: const Icon(Icons.add),
-//       ), // This trailing comma makes auto-formatting nicer for build methods.
-//     );
-//   }
-// }

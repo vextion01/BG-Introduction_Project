@@ -1,10 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import './find_bg_screen.dart';
 import 'package:adobe_xd/page_link.dart';
 import './result_screen.dart';
 import './menu_on_top_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'TestFireBase/randomData.dart';
 
 class MianScreen extends StatelessWidget {
   MianScreen({
@@ -17,27 +21,14 @@ class MianScreen extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           Pinned.fromPins(
-            Pin(size: 96.0, start: -892.0),
-            Pin(size: 27.0, middle: 0.7145),
-            child: Text(
-              'Version 1.0',
-              style: TextStyle(
-                fontFamily: 'Segoe UI',
-                fontSize: 20,
-                color: const Color(0xfffff5f5),
-              ),
-              softWrap: false,
-            ),
-          ),
-          Pinned.fromPins(
             Pin(start: 10.0, end: 9.0),
             Pin(size: 206.0, middle: 0.2627),
             child: Stack(
               children: <Widget>[
                 Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
-                      image: const AssetImage('assets/images/logo.png'),
+                      image: AssetImage('assets/images/logo.png'),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -75,14 +66,14 @@ class MianScreen extends StatelessWidget {
                     )),
                     Transform.translate(
                       offset: Offset(34.0, 14.0),
-                      child: SizedBox(
+                      child: const SizedBox(
                         width: 132.0,
                         child: Text(
                           'ค้นหาบอร์ดเกม',
                           style: TextStyle(
                             fontFamily: 'tahomo',
                             fontSize: 20,
-                            color: const Color(0xff000000),
+                            color: Color(0xff000000),
                             fontWeight: FontWeight.w500,
                           ),
                           textAlign: TextAlign.center,
@@ -100,6 +91,7 @@ class MianScreen extends StatelessWidget {
               width: 200.0,
               height: 50.0,
               child: PageLink(
+                
                 links: [
                   PageLinkInfo(
                     transition: LinkTransition.Fade,
@@ -123,15 +115,15 @@ class MianScreen extends StatelessWidget {
                       fit: BoxFit.fill,
                     )),
                     Transform.translate(
-                      offset: Offset(34.0, 14.0),
-                      child: SizedBox(
+                      offset: const Offset(34.0, 14.0),
+                      child: const SizedBox(
                         width: 132.0,
                         child: Text(
                           'สุ่มบอร์ดเกม',
                           style: TextStyle(
                             fontFamily: 'tahomo',
                             fontSize: 20,
-                            color: const Color(0xff000000),
+                            color: Color(0xff000000),
                             fontWeight: FontWeight.w500,
                           ),
                           textAlign: TextAlign.center,
