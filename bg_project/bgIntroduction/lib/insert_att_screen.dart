@@ -99,7 +99,7 @@ class _dropdownState extends State<dropdown> {
     return Scaffold(
       body: Center(
         child: Container(
-          width: 400,
+          alignment: Alignment.center,
           color: Color.fromARGB(217, 223, 159, 48),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -192,9 +192,12 @@ class _dropdownState extends State<dropdown> {
                     });
                   },
                   items: <String>[
-                    'Family Party',
-                    "Children's Abstract",
-                    'Strategy Thematic',
+                    'Family',
+                    'Party',
+                    "Children's",
+                    'Abstract',
+                    'Strategy',
+                    'Thematic',
                   ].map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,

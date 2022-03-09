@@ -14,8 +14,7 @@ Future<void> main() async {
     options: const FirebaseOptions(
         apiKey: "AIzaSyBgNZ5HwqP8QIIYE4vylJaBi60t-oR1O94",
         authDomain: "bg-introduction-3aade.firebaseapp.com",
-        databaseURL:
-            "https://bg-introduction-3aade-default-rtdb.asia-southeast1.firebasedatabase.app",
+        databaseURL: "https://bg-introduction-3aade-default-rtdb.asia-southeast1.firebasedatabase.app",
         projectId: "bg-introduction-3aade",
         storageBucket: "bg-introduction-3aade.appspot.com",
         messagingSenderId: "593533535477",
@@ -27,7 +26,6 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   final Future<FirebaseApp> _fbapp = Firebase.initializeApp();
-
   MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
@@ -46,10 +44,6 @@ class MyApp extends StatelessWidget {
               return const Text('Sommthing went wrong');
             } else if (snapshot.hasData) {
               return MaterialApp(
-                  title: 'Flutter Demo',
-                  theme: ThemeData(
-                    primarySwatch: Colors.blue,
-                  ),
                   home: SplashScreen());
               // return MyHomePage(title: 'My Amazing counter App');//dont care this line it's for test firebase
             } else {
