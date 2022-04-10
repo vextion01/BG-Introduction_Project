@@ -8,10 +8,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '/TestFireBase/randomData.dart';
 import 'dart:math';
 
 class ResultScreen extends StatelessWidget {
+  
   ResultScreen({
     Key? key,
   }) : super(key: key);
@@ -103,7 +103,7 @@ class ResultScreen extends StatelessWidget {
                   Container(
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('assets/images/picname1.jpg'),
+                        image: AssetImage(''),
                         fit: BoxFit.fill,
                       ),
                     ),

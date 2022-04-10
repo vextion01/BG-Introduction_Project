@@ -83,13 +83,28 @@ class dropdown extends StatefulWidget {
 }
 
 class _dropdownState extends State<dropdown> {
+  final _dropdownFormKey = GlobalKey<FormState>();
   String? dropdownValue;
   String? dropdownValue2;
   String? dropdownValue3;
+  List group = [];
+
+  _validateForm() {
+    bool _isValid = _dropdownFormKey.currentState!.validate();
+
+    // if (_selectedItem == null) {
+    //   setState(() => _dropdownError = "Please select an option!");
+    //   _isValid = false;
+    // }
+
+    if (_isValid) {
+      //form is valid
+    }
+  }
 
   void _addGroup() {
     setState(() {
-      List group = [dropdownValue, dropdownValue2, dropdownValue3];
+      group = [dropdownValue, dropdownValue2, dropdownValue3];
       print(group);
     });
   }
@@ -97,6 +112,7 @@ class _dropdownState extends State<dropdown> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _dropdownFormKey,
       body: Center(
         child: Container(
           alignment: Alignment.center,
@@ -146,19 +162,20 @@ class _dropdownState extends State<dropdown> {
                 child: DropdownButton<String>(
                   borderRadius: BorderRadius.circular(20),
                   dropdownColor: Colors.white,
-                  hint: Text("เวลาที่เล่น"),
+                  hint: Text("เวลาที่เล่น(นาที)"),
                   value: dropdownValue2,
                   icon: const Icon(Icons.arrow_drop_down),
                   elevation: 16,
                   isExpanded: true,
                   underline: SizedBox(),
                   style: const TextStyle(color: Colors.black),
+                  // validator: (value) => value == null ? "Select a country" : null,
                   onChanged: (String? newValue) {
                     setState(() {
                       dropdownValue2 = newValue!;
                     });
                   },
-                  items: <String>['5-15', '20-30', '45-60', '60+']
+                  items: <String>['5-15', '20-30', '45-60', '60 นาทีขี้นไป']
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
@@ -212,7 +229,10 @@ class _dropdownState extends State<dropdown> {
               Container(
                 width: 100,
                 child: ElevatedButton(
-                  onPressed: _addGroup,
+                  onPressed: () {
+                    // _validateForm();
+                    _addGroup;
+                  },
                   child: const Text('ค้นหา'),
                   style: ButtonStyle(
                     backgroundColor:

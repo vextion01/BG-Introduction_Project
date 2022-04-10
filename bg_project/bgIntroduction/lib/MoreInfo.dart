@@ -6,22 +6,47 @@ import './mian_screen.dart';
 import './save_data_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:math';
 
-
-class Resultinfo extends StatefulWidget {
-  const Resultinfo({this.data});
-
-  final QueryDocumentSnapshot<Object?>? data;
-
+class MoreInfo extends StatefulWidget {
   @override
-  InfoScreen createState() => InfoScreen();
+  ResultRansominfo createState() => ResultRansominfo();
 }
 
-class InfoScreen extends State<Resultinfo> {
+class ResultRansominfo extends State<MoreInfo> {
+  String nameBG = 'nameBoardGame';
+  String linkBG = 'howToPlayLink';
+  String maxPYBG = '1maximumNumberOfPlayers';
+  String imageBG = 'boardgameimages';
+  String timeBG = '1playTimePerRound';
+  String typeBG = '1typeBoardGame';
+  String youtubeBG = 'youtubeLink';
+  int i = 0;
+  getData() async {
+    final collection =
+        await FirebaseFirestore.instance.collection('DataBG').get();
+    var element = collection.docs[Random().nextInt(collection.size)];
+    setState(() {
+      nameBG = element['nameBoardGame'];
+      linkBG = element['howToPlayLink'];
+      maxPYBG = element['maximumNumberOfPlayers'].toString();
+      imageBG = element['boardgameimages'];
+      timeBG = element['playTimePerRound'].toString();
+      typeBG = element['typeBoardGame'];
+      youtubeBG = element['youtubeLink'];
+    });
+  }
 
-  InfoScreen({ Key? key,}) : super();
+  ResultRansominfo({
+    Key? key,
+  }) : super();
+
   @override
   Widget build(BuildContext context) {
+    if (i == 0) {
+      getData();
+      i++;
+    }
     return Scaffold(
       backgroundColor: const Color(0xffe8b154),
       body: Stack(
@@ -32,22 +57,24 @@ class InfoScreen extends State<Resultinfo> {
             child: SizedBox(
               width: 50.0,
               height: 50.0,
-            child: Expanded (
+              child: Center(
                 child: IconButton(
                   icon: SvgPicture.string(_svg_wzaoby),
-                   iconSize: 100,
-              onPressed: () async {
-                String url = widget.data!.get('youtubeLink');
-                var urllaunchable = await canLaunch(
-                    url); //canLaunch is from url_launcher package
-                if (urllaunchable) {
-                  await launch(
-                      url); //launch is from url_launcher package to launch URL
-                } else {
-                  print("URL can't be launched.");
-                }
-              },
-            ),),
+                  iconSize: 100,
+                  onPressed: () async {
+                    //youtubeLink
+                    String url = youtubeBG;
+                    var urllaunchable = await canLaunch(
+                        url); //canLaunch is from url_launcher package
+                    if (urllaunchable) {
+                      await launch(
+                          url); //launch is from url_launcher package to launch URL
+                    } else {
+                      print("URL can't be launched.");
+                    }
+                  },
+                ),
+              ),
             ),
           ),
           Pinned.fromPins(
@@ -133,13 +160,11 @@ class InfoScreen extends State<Resultinfo> {
                     height: 50.0,
                     child: Center(
                         child: IconButton(
-                          icon: SvgPicture.string(_svg_pwmcm),
-                          iconSize: 100,
-                      // child: SvgPicture.string(_svg_pwmcm,
-                      //     allowDrawingOutsideViewBox: true,
-                      //     fit: BoxFit.fill,),
+                      icon: SvgPicture.string(_svg_pwmcm),
+                      iconSize: 100,
                       onPressed: () async {
-                        String url = widget.data!.get('howToPlayLink');
+                        //website link
+                        String url = linkBG;
                         var urllaunchable = await canLaunch(
                             url); //canLaunch is from url_launcher package
                         if (urllaunchable) {
@@ -166,10 +191,8 @@ class InfoScreen extends State<Resultinfo> {
               ],
             ),
           ),
-          Center(child: 
-           Pinned.fromPins(
-            Pin(size: 250, middle: 0.5),
-            Pin(size: 250, end: 375.0),
+          Align(
+            alignment: Alignment(0.00, -0.700),
             child: SizedBox(
               width: 250.0,
               height: 250.0,
@@ -178,8 +201,7 @@ class InfoScreen extends State<Resultinfo> {
                   Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image:
-                            NetworkImage(widget.data!.get('boardgameimages')),
+                        image: NetworkImage(imageBG),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -187,7 +209,6 @@ class InfoScreen extends State<Resultinfo> {
                 ],
               ),
             ),
-          ),
           ),
           Pinned.fromPins(
             Pin(start: 8.0, end: 8.0),
@@ -204,12 +225,12 @@ class InfoScreen extends State<Resultinfo> {
                 Pinned.fromPins(
                   Pin(size: 200.0, start: 0.0),
                   Pin(size: 30.0, middle: 0.2000),
-                  child: Text(
+                  child: const Text(
                     'จำนวนผู้เล่นสูงสุด(คน) : ',
                     style: TextStyle(
                       fontFamily: 'tahomo',
                       fontSize: 20,
-                      color: const Color(0xff000000),
+                      color: Color(0xff000000),
                       fontWeight: FontWeight.w500,
                     ),
                     textAlign: TextAlign.center,
@@ -220,11 +241,11 @@ class InfoScreen extends State<Resultinfo> {
                   Pin(size: 34.0, start: 300.0),
                   Pin(size: 30.0, middle: 0.225),
                   child: Text(
-                    widget.data!.get('maximumNumberOfPlayers').toString(),
-                    style: TextStyle(
+                    maxPYBG,
+                    style: const TextStyle(
                       fontFamily: 'tahomo',
                       fontSize: 20,
-                      color: const Color(0xff000000),
+                      color: Color(0xff000000),
                       fontWeight: FontWeight.w500,
                     ),
                     textAlign: TextAlign.center,
@@ -234,12 +255,12 @@ class InfoScreen extends State<Resultinfo> {
                 Pinned.fromPins(
                   Pin(size: 300.0, start: -15.0),
                   Pin(size: 30.0, middle: 0.4000),
-                  child: Text(
+                  child: const Text(
                     'ระยะเวลาการเล่นต่อรอบ(นาที) : ',
                     style: TextStyle(
                       fontFamily: 'tahomo',
                       fontSize: 20,
-                      color: const Color(0xff000000),
+                      color: Color(0xff000000),
                       fontWeight: FontWeight.w500,
                     ),
                     textAlign: TextAlign.center,
@@ -250,11 +271,11 @@ class InfoScreen extends State<Resultinfo> {
                   Pin(size: 34.0, start: 300.0),
                   Pin(size: 30.0, middle: 0.425),
                   child: Text(
-                    widget.data!.get('playTimePerRound').toString(),
-                    style: TextStyle(
+                    timeBG,
+                    style: const TextStyle(
                       fontFamily: 'tahomo',
                       fontSize: 20,
-                      color: const Color(0xff000000),
+                      color: Color(0xff000000),
                       fontWeight: FontWeight.w500,
                     ),
                     textAlign: TextAlign.center,
@@ -264,12 +285,12 @@ class InfoScreen extends State<Resultinfo> {
                 Pinned.fromPins(
                   Pin(size: 200.0, start: 0.0),
                   Pin(size: 30.0, middle: 0.6000),
-                  child: Text(
+                  child: const Text(
                     'ประเภทของบอร์ดเกม : ',
                     style: TextStyle(
                       fontFamily: 'tahomo',
                       fontSize: 20,
-                      color: const Color(0xff000000),
+                      color: Color(0xff000000),
                       fontWeight: FontWeight.w500,
                     ),
                     textAlign: TextAlign.center,
@@ -280,11 +301,11 @@ class InfoScreen extends State<Resultinfo> {
                   Pin(size: 100.0, start: 275.0),
                   Pin(size: 30.0, middle: 0.625),
                   child: Text(
-                    widget.data!.get('typeBoardGame').toString(),
-                    style: TextStyle(
+                    typeBG,
+                    style: const TextStyle(
                       fontFamily: 'tahomo',
                       fontSize: 20,
-                      color: const Color(0xff000000),
+                      color: Color(0xff000000),
                       fontWeight: FontWeight.w500,
                     ),
                     textAlign: TextAlign.center,
@@ -305,11 +326,11 @@ class InfoScreen extends State<Resultinfo> {
                     width: 300.0,
                     height: 22.0,
                     child: Text(
-                      widget.data!.get('nameBoardGame'),
-                      style: TextStyle(
+                      nameBG,
+                      style: const TextStyle(
                         fontFamily: 'tahomo',
                         fontSize: 20,
-                        color: const Color(0xfffff5f5),
+                        color: Color(0xfffff5f5),
                         fontWeight: FontWeight.w500,
                       ),
                       softWrap: false,
@@ -326,22 +347,6 @@ class InfoScreen extends State<Resultinfo> {
                   ),
                 ),
               ],
-            ),
-          ),
-          Align(
-            alignment: Alignment(-0.141, -0.013),
-            child: SizedBox(
-              width: 6.0,
-              height: 24.0,
-              child: Text(
-                ' ',
-                style: TextStyle(
-                  fontFamily: 'Tahoma',
-                  fontSize: 20,
-                  color: const Color(0xfffff5f5),
-                ),
-                softWrap: false,
-              ),
             ),
           ),
           Align(
@@ -362,7 +367,7 @@ class InfoScreen extends State<Resultinfo> {
                       ),
                     ),
                   ),
-                  Align(
+                  const Align(
                     alignment: Alignment(0.119, -1.0),
                     child: SizedBox(
                       width: 150.0,
@@ -372,7 +377,7 @@ class InfoScreen extends State<Resultinfo> {
                         style: TextStyle(
                           fontFamily: 'tahomo',
                           fontSize: 16,
-                          color: const Color(0xfffff5f5),
+                          color: Color(0xfffff5f5),
                           fontWeight: FontWeight.w500,
                         ),
                         softWrap: false,
@@ -393,7 +398,7 @@ class InfoScreen extends State<Resultinfo> {
                     Container(
                       color: const Color(0xffe18721),
                     ),
-                    Align(
+                    const Align(
                       alignment: Alignment(0.25, 0.0),
                       child: SizedBox(
                         width: 250.0,
@@ -403,7 +408,7 @@ class InfoScreen extends State<Resultinfo> {
                           style: TextStyle(
                             fontFamily: 'tahomo',
                             fontSize: 20,
-                            color: const Color(0xfffff5f5),
+                            color: Color(0xfffff5f5),
                             fontWeight: FontWeight.w500,
                           ),
                           softWrap: false,
@@ -420,8 +425,6 @@ class InfoScreen extends State<Resultinfo> {
     );
   }
 }
-
-
 
 const String _svg_wzaoby =
     '<svg viewBox="0.0 0.0 38.4 27.0" ><path transform="translate(-1.05, -4.5)" d="M 38.64761734008789 8.72458553314209 C 38.20598602294922 7.061695098876953 36.90478134155273 5.752054214477539 35.25264739990234 5.307609081268311 C 32.25803756713867 4.5 20.25 4.5 20.25 4.5 C 20.25 4.5 8.242031097412109 4.5 5.24735164642334 5.307609558105469 C 3.595218658447266 5.752125263214111 2.294015645980835 7.061695575714111 1.852382898330688 8.724586486816406 C 1.049976587295532 11.73867225646973 1.049976587295532 18.02728271484375 1.049976587295532 18.02728271484375 C 1.049976587295532 18.02728271484375 1.049976587295532 24.31589126586914 1.852382898330688 27.32997894287109 C 2.294015645980835 28.99287033081055 3.595218658447266 30.24794769287109 5.24735164642334 30.69239234924316 C 8.242031097412109 31.5 20.25 31.5 20.25 31.5 C 20.25 31.5 32.25796890258789 31.5 35.25264739990234 30.69239044189453 C 36.90478134155273 30.24794578552246 38.20598220825195 28.99286651611328 38.64761734008789 27.32997703552246 C 39.45002365112305 24.31589126586914 39.45002365112305 18.02728271484375 39.45002365112305 18.02728271484375 C 39.45002365112305 18.02728271484375 39.45002365112305 11.73867321014404 38.64761734008789 8.724587440490723 Z M 16.32269477844238 23.73686599731445 L 16.32269477844238 12.31769561767578 L 26.35903167724609 18.02742195129395 L 16.32269668579102 23.73686790466309 Z" fill="#ffffff" stroke="none" stroke-width="1" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';

@@ -3,6 +3,35 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:math';
 
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+        apiKey: "AIzaSyBgNZ5HwqP8QIIYE4vylJaBi60t-oR1O94",
+        authDomain: "bg-introduction-3aade.firebaseapp.com",
+        databaseURL:
+            "https://bg-introduction-3aade-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "bg-introduction-3aade",
+        storageBucket: "bg-introduction-3aade.appspot.com",
+        messagingSenderId: "593533535477",
+        appId: "1:593533535477:web:c07a64b0a410954d84b1bc",
+        measurementId: "G-70KQKL9Q8J"),
+  );
+  final CollectionReference _collectionRef =
+      FirebaseFirestore.instance.collection('DataBG');
+  Future<void> getData() async {
+    var collection = FirebaseFirestore.instance.collection('DataBG');
+    collection.snapshots().listen((querySnapshot) {
+      for (var doc in querySnapshot.docs) {
+        Map<String, dynamic> data = doc.data();
+        final randomNumber = Random();
+        var randomData = data[randomNumber]; // <-- Retrieving the value.
+        print(randomData);
+      }
+    });
+  }
+}
+
 class Randomtes {
   final CollectionReference _collectionRef =
       FirebaseFirestore.instance.collection('DataBG');

@@ -29,6 +29,6 @@ Widget build(BuildContext context) {
                 Text(snapshot.data.documents[0]['typeBoardGame'].toString()),
               ],
             );
-          }) // This trailing comma makes auto-formatting nicer for build methods.
+          })
       );
 }

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'dart:math';
 import 'package:firebase_core/firebase_core.dart';
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,16 +33,15 @@ class RandomData extends StatelessWidget {
               future: _fbapp,
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return Center(
+                  return const Center(
                     child: Text('no data'),
                   );
                 }
                 final documents = snapshot.data!.docs.reversed;
-                for (var item in documents) {
-                  final name = item.get('nameBoardGame');
-                  final imageSrt = item.get('boardgameimages');
-                  print('$name : "$imageSrt"');
-                }
+                for (var item in documents) {}
+                var element =
+                    documents.elementAt(Random().nextInt(documents.length));
+                print("Random data is here : ${element.data()}");
                 return Center(child: Text('Have data'));
               })),
     );
