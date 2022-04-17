@@ -1,25 +1,13 @@
-import 'dart:math';
 import 'package:bg_introducetion/MoreInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import './find_bg_screen.dart';
 import 'package:adobe_xd/page_link.dart';
-import './result_screen.dart';
 import '/MoreInfo.dart';
-import './menu_on_top_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MianScreen extends StatelessWidget {
-  // getData() async {
-  //   final collection =
-  //       await FirebaseFirestore.instance.collection('DataBG').get();
-  //   for (var element in collection.docs) {}
-  //   var element = collection.docs[Random().nextInt(collection.size)];
-  //   return element;
-  // }
-
-  MianScreen({
+  const MianScreen({
     Key? key,
   }) : super(key: key);
   @override
@@ -153,25 +141,6 @@ class MianScreen extends StatelessWidget {
                   allowDrawingOutsideViewBox: true,
                   fit: BoxFit.fill,
                 )),
-                Pinned.fromPins(
-                  Pin(size: 18.0, start: 21.0),
-                  Pin(size: 12.0, middle: 0.5),
-                  child: PageLink(
-                    links: [
-                      PageLinkInfo(
-                        transition: LinkTransition.Fade,
-                        ease: Curves.easeOut,
-                        duration: 0.3,
-                        pageBuilder: () => MenuOnTopScreen(),
-                      ),
-                    ],
-                    child: SvgPicture.string(
-                      _svg_uyx2,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
               ],
             ),
           ),

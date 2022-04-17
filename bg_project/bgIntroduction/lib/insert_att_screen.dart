@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import './mian_screen.dart';
 import 'package:adobe_xd/page_link.dart';
-import './search_byatt_screen.dart';
+// import './search_byatt_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class InsertAttScreen extends StatelessWidget {
@@ -51,16 +51,15 @@ class InsertAttScreen extends StatelessWidget {
                         ),
                         Transform.translate(
                           offset: Offset(68.0, 28.0),
-                          child: Text(
-                            'ค้นหาบอร์ดเกมด้วยคุณลักษณะ',
-                            style: TextStyle(
-                              fontFamily: 'tahomo',
-                              fontSize: 20,
-                              color: const Color(0xfffff5f5),
-                              fontWeight: FontWeight.w500,
-                            ),
-                            softWrap: false,
-                          ),
+                          child: const Text('ค้นหาบอร์ดเกมด้วยคุณลักษณะ',
+                              style: TextStyle(
+                                fontFamily: 'tahomo',
+                                fontSize: 24,
+                                color: Color(0xfffff5f5),
+                                fontWeight: FontWeight.w500,
+                              ),
+                              softWrap: false,
+                              textAlign: TextAlign.center),
                         ),
                       ],
                     ),
@@ -91,12 +90,6 @@ class _dropdownState extends State<dropdown> {
 
   _validateForm() {
     bool _isValid = _dropdownFormKey.currentState!.validate();
-
-    // if (_selectedItem == null) {
-    //   setState(() => _dropdownError = "Please select an option!");
-    //   _isValid = false;
-    // }
-
     if (_isValid) {
       //form is valid
     }
@@ -135,7 +128,7 @@ class _dropdownState extends State<dropdown> {
                   elevation: 16,
                   isExpanded: true,
                   underline: SizedBox(),
-                  style: const TextStyle(color: Colors.black),
+                  style: const TextStyle(fontSize: 20, color: Colors.black),
                   onChanged: (String? newValue) {
                     setState(() {
                       dropdownValue = newValue!;
@@ -145,7 +138,12 @@ class _dropdownState extends State<dropdown> {
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
-                      child: Text(value),
+                      child: Text(
+                        value,
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
                     );
                   }).toList(),
                 ),
@@ -168,7 +166,7 @@ class _dropdownState extends State<dropdown> {
                   elevation: 16,
                   isExpanded: true,
                   underline: SizedBox(),
-                  style: const TextStyle(color: Colors.black),
+                  style: const TextStyle(fontSize: 20, color: Colors.black),
                   // validator: (value) => value == null ? "Select a country" : null,
                   onChanged: (String? newValue) {
                     setState(() {
@@ -179,7 +177,12 @@ class _dropdownState extends State<dropdown> {
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
-                      child: Text(value),
+                      child: Text(
+                        value,
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
                     );
                   }).toList(),
                 ),
@@ -202,7 +205,7 @@ class _dropdownState extends State<dropdown> {
                   elevation: 16,
                   isExpanded: true,
                   underline: SizedBox(),
-                  style: const TextStyle(color: Colors.black),
+                  style: const TextStyle(fontSize: 20, color: Colors.black),
                   onChanged: (String? newValue) {
                     setState(() {
                       dropdownValue3 = newValue!;
@@ -218,7 +221,12 @@ class _dropdownState extends State<dropdown> {
                   ].map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
-                      child: Text(value),
+                      child: Text(
+                        value,
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
                     );
                   }).toList(),
                 ),
@@ -227,21 +235,28 @@ class _dropdownState extends State<dropdown> {
                 height: 50,
               ),
               Container(
-                width: 100,
+                width: 150,
+                height: 40,
                 child: ElevatedButton(
                   onPressed: () {
                     // _validateForm();
                     _addGroup;
                   },
-                  child: const Text('ค้นหา'),
+                  child: const Text(
+                    'ค้นหา',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.white),
                     foregroundColor:
                         MaterialStateProperty.all<Color>(Colors.black),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
+                      const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          side: BorderSide(width: 4, color: Colors.blue)),
                     ),
                   ),
                 ),

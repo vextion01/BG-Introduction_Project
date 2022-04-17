@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:adobe_xd/page_link.dart';
 import './mian_screen.dart';
-import './save_data_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:math';
@@ -86,37 +85,13 @@ class ResultRansominfo extends State<MoreInfo> {
                   transition: LinkTransition.Fade,
                   ease: Curves.easeOut,
                   duration: 0.3,
-                  pageBuilder: () => MianScreen(),
+                  pageBuilder: () => const MianScreen(),
                 ),
               ],
               child: SvgPicture.string(
                 _svg_kzjlv,
                 allowDrawingOutsideViewBox: true,
                 fit: BoxFit.fill,
-              ),
-            ),
-          ),
-          Pinned.fromPins(
-            Pin(size: 20.0, middle: 0.7176),
-            Pin(size: 30.0, end: 26.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.Fade,
-                  ease: Curves.easeOut,
-                  duration: 0.3,
-                  pageBuilder: () => SaveDataScreen(),
-                ),
-              ],
-              child: Stack(
-                children: <Widget>[
-                  SizedBox.expand(
-                      child: SvgPicture.string(
-                    _svg_mjo1mm,
-                    allowDrawingOutsideViewBox: true,
-                    fit: BoxFit.fill,
-                  )),
-                ],
               ),
             ),
           ),
@@ -321,20 +296,20 @@ class ResultRansominfo extends State<MoreInfo> {
             child: Stack(
               children: <Widget>[
                 Align(
-                  alignment: Alignment(5.25, 0),
+                  //alignment: Alignment(5.25, 0),
                   child: SizedBox(
                     width: 300.0,
                     height: 22.0,
-                    child: Text(
-                      nameBG,
-                      style: const TextStyle(
-                        fontFamily: 'tahomo',
-                        fontSize: 20,
-                        color: Color(0xfffff5f5),
-                        fontWeight: FontWeight.w500,
-                      ),
-                      softWrap: false,
-                    ),
+                    child: Text(nameBG,
+                        style: const TextStyle(
+                          fontFamily: 'tahomo',
+                          fontSize: 20,
+                          color: Color(0xfffff5f5),
+                          fontWeight: FontWeight.w500,
+                        ),
+                        // textAlign: TextAlign.center,
+                        softWrap: false,
+                        textAlign: TextAlign.center),
                   ),
                 ),
                 Pinned.fromPins(
@@ -349,39 +324,37 @@ class ResultRansominfo extends State<MoreInfo> {
               ],
             ),
           ),
+          //_svg_rlb0e
           Align(
-            alignment: Alignment(0.0, 0.013),
+            alignment: Alignment(0.0, 0.006),
             child: SizedBox(
               width: 237.0,
-              height: 20.0,
+              height: 24.0,
               child: Stack(
                 children: <Widget>[
-                  Transform.translate(
-                    offset: Offset(0.0, 20.0),
-                    child: SizedBox(
-                      width: 237.0,
-                      height: 1.0,
-                      child: SvgPicture.string(
-                        _svg_rlb0e,
-                        allowDrawingOutsideViewBox: true,
-                      ),
+                  Pinned.fromPins(
+                    Pin(start: 0.0, end: 0.0),
+                    Pin(size: 1.0, end: -1.0),
+                    child: SvgPicture.string(
+                      _svg_rlb0e,
+                      allowDrawingOutsideViewBox: true,
+                      fit: BoxFit.fill,
                     ),
                   ),
-                  const Align(
-                    alignment: Alignment(0.119, -1.0),
+                  Align(
+                    alignment: Alignment(0.012, -1.0),
                     child: SizedBox(
-                      width: 150.0,
-                      height: 20.0,
-                      child: Text(
-                        'รายละเอียดบอร์ดเกม   ',
-                        style: TextStyle(
-                          fontFamily: 'tahomo',
-                          fontSize: 16,
-                          color: Color(0xfffff5f5),
-                          fontWeight: FontWeight.w500,
-                        ),
-                        softWrap: false,
-                      ),
+                      width: 155.0,
+                      height: 22.0,
+                      child: Text('รายละเอียดบอร์ดเกม',
+                          style: TextStyle(
+                            fontFamily: 'tahomo',
+                            fontSize: 20,
+                            color: const Color(0xfffff5f5),
+                            fontWeight: FontWeight.w500,
+                          ),
+                          softWrap: false,
+                          textAlign: TextAlign.center),
                     ),
                   ),
                 ],
@@ -391,35 +364,23 @@ class ResultRansominfo extends State<MoreInfo> {
           Pinned.fromPins(
             Pin(start: 0.0, end: 0.0),
             Pin(size: 78.0, start: 0.0),
-            child: Stack(
-              children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                    Container(
-                      color: const Color(0xffe18721),
-                    ),
-                    const Align(
-                      alignment: Alignment(0.25, 0.0),
-                      child: SizedBox(
-                        width: 250.0,
-                        height: 22.0,
-                        child: Text(
-                          'รายละเอียดของบอร์ดเกม   ',
-                          style: TextStyle(
-                            fontFamily: 'tahomo',
-                            fontSize: 20,
-                            color: Color(0xfffff5f5),
-                            fontWeight: FontWeight.w500,
-                          ),
-                          softWrap: false,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+            child: Container(
+              color: const Color(0xffe18721),
             ),
           ),
+          Pinned.fromPins(
+            Pin(size: 221.0, middle: 0.5036),
+            Pin(size: 26.0, start: 25.0),
+            child: const Text('รายละเอียดของบอร์ดเกม',
+                style: TextStyle(
+                  fontFamily: 'tahomo',
+                  fontSize: 24,
+                  color: Color(0xfffff5f5),
+                  fontWeight: FontWeight.w500,
+                ),
+                softWrap: false,
+                textAlign: TextAlign.center),
+          ), //
         ],
       ),
     );

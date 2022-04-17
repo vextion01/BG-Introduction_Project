@@ -5,7 +5,7 @@ import 'package:adobe_xd/page_link.dart';
 
 class SplashScreen extends StatelessWidget {
   final ImageProvider logo;
-  SplashScreen({
+  const SplashScreen({
     Key? key,
     this.logo = const AssetImage('assets/images/logo.png'),
   }) : super(key: key);

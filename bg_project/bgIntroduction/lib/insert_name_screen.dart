@@ -1,15 +1,13 @@
 import 'package:bg_introducetion/info_screen.dart';
-import 'package:bg_introducetion/result_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import './mian_screen.dart';
 import 'package:adobe_xd/page_link.dart';
-import './search_by_name_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class InsertNameScreen extends StatelessWidget {
-  InsertNameScreen({
+  const InsertNameScreen({
     Key? key,
   }) : super(key: key);
   @override
@@ -22,9 +20,9 @@ class InsertNameScreen extends StatelessWidget {
             Pin(start: 10.0, end: 9.0),
             Pin(size: 206.0, middle: 0.2627),
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: const AssetImage('assets/images/logo.png'),
+                  image: AssetImage('assets/images/logo.png'),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -44,32 +42,13 @@ class InsertNameScreen extends StatelessWidget {
               ],
             ),
           ),
-          // Pinned.fromPins(
-          //   Pin(size: 40.5, end: 9.0),
-          //   Pin(size: 31.5, end: 18.5),
-          //   child: PageLink(
-          //     links: [
-          //       PageLinkInfo(
-          //         transition: LinkTransition.Fade,
-          //         ease: Curves.easeOut,
-          //         duration: 0.3,
-          //         pageBuilder: () => MianScreen(),
-          //       ),
-          //     ],
-          //     child: SvgPicture.string(
-          //       _svg_yt396u,
-          //       allowDrawingOutsideViewBox: true,
-          //       fit: BoxFit.fill,
-          //     ),
-          //   ),
-          // ),
           Pinned.fromPins(
             Pin(start: 0.0, end: 0.0),
             Pin(size: 299.0, end: 0.0),
             child: Stack(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.fromLTRB(0.0, 91.0, 0.0, 0.0),
+                  padding: const EdgeInsets.fromLTRB(0.0, 91.0, 0.0, 0.0),
                   child: Stack(
                     children: <Widget>[
                       Stack(
@@ -90,7 +69,7 @@ class InsertNameScreen extends StatelessWidget {
                       Container(
                         color: const Color(0xffe38f00),
                       ),
-                      Center(
+                      const Center(
                         child: SizedBox(
                           width: 156.0,
                           height: 27.0,
@@ -99,7 +78,7 @@ class InsertNameScreen extends StatelessWidget {
                             style: TextStyle(
                               fontFamily: 'tahomo',
                               fontSize: 25,
-                              color: const Color(0xffffffff),
+                              color: Color(0xffffffff),
                               fontWeight: FontWeight.w500,
                             ),
                             textAlign: TextAlign.center,
@@ -178,7 +157,7 @@ class CustomSearchDelegate extends SearchDelegate {
         builder:
             (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshort) {
           if (!snapshort.hasData) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else {
             if (snapshort.data!.docs
                 .where((QueryDocumentSnapshot<Object?> element) =>
@@ -202,7 +181,6 @@ class CustomSearchDelegate extends SearchDelegate {
                   final String nameBG = data.get('nameBoardGame');
                   final String image = data['boardgameimages'];
                   final String name = data['typeBoardGame'];
-
                   return ListTile(
                     onTap: () {
                       Navigator.push(
