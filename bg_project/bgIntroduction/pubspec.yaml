@@ -32,13 +32,15 @@ dependencies:
   cupertino_icons: ^1.0.4
   http: ^0.13.4
   adobe_xd: ^2.0.0
-  firebase_core: ^1.13.1
+  firebase_core: ^1.14.1 
   firebase_database: ^9.0.8
   firebase_auth: ^3.3.9
   cloud_firestore: ^3.1.10
   html: ^0.15.0
   google_fonts: ^2.3.1
   url_launcher: ^6.0.3
+  progress_dialog: ^1.2.4
+  
   
 
 

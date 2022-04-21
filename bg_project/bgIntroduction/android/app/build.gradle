@@ -52,11 +52,12 @@ android {
         // versionName flutterVersionName
 
         //many andiord user use minSdkVersion 21 
+        multiDexEnabled true
         minSdkVersion 21
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        multiDexEnabled true
+        
 
         // versionCode flutterVersionCode.toInteger()
         // versionName flutterVersionName
@@ -79,5 +80,6 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation("com.android.support:multidex:1.0.3") // for multi-dex
 }
 apply plugin: 'com.google.gms.google-services'

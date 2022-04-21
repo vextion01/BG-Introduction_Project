@@ -32,7 +32,7 @@ class InfoScreen extends State<Resultinfo> {
             child: SizedBox(
               width: 50.0,
               height: 50.0,
-              child: Expanded(
+              child: Center(
                 child: IconButton(
                   icon: SvgPicture.string(_svg_wzaoby),
                   iconSize: 100,
@@ -162,7 +162,7 @@ class InfoScreen extends State<Resultinfo> {
           ),
           Pinned.fromPins(
             Pin(start: 8.0, end: 8.0),
-            Pin(size: 203.0, end: 89.0),
+            Pin(size: 159.0, end: 89.0),
             child: Stack(
               children: <Widget>[
                 Container(

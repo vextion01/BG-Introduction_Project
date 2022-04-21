@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:adobe_xd/pinned.dart';
-import './mian_screen.dart';
-import 'package:adobe_xd/page_link.dart';
-// import './search_byatt_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'dart:async';
+import 'package:bg_introducetion/SelectBG.dart';
+import 'package:bg_introducetion/insert_name_screen.dart';
+import 'package:bg_introducetion/MoreInfo.dart';
+import 'mian_screen.dart';
+
+import 'package:adobe_xd/page_link.dart';
+import 'package:adobe_xd/pinned.dart';
+
+List nameBGList = [];
+List imageBGList = [];
 
 class InsertAttScreen extends StatelessWidget {
-  InsertAttScreen({
+  const InsertAttScreen({
     Key? key,
   }) : super(key: key);
   @override
@@ -16,7 +26,7 @@ class InsertAttScreen extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           Container(
-            child: dropdown(),
+            child: const dropdown(),
           ),
           Pinned.fromPins(
             Pin(size: 40.5, end: 14.7),
@@ -27,7 +37,7 @@ class InsertAttScreen extends StatelessWidget {
                   transition: LinkTransition.Fade,
                   ease: Curves.easeOut,
                   duration: 0.3,
-                  pageBuilder: () => MianScreen(),
+                  pageBuilder: () => const MianScreen(),
                 ),
               ],
               child: SvgPicture.string(
@@ -50,16 +60,17 @@ class InsertAttScreen extends StatelessWidget {
                           color: const Color(0xffe18721),
                         ),
                         Transform.translate(
-                          offset: Offset(68.0, 28.0),
-                          child: const Text('ค้นหาบอร์ดเกมด้วยคุณลักษณะ',
-                              style: TextStyle(
-                                fontFamily: 'tahomo',
-                                fontSize: 24,
-                                color: Color(0xfffff5f5),
-                                fontWeight: FontWeight.w500,
-                              ),
-                              softWrap: false,
-                              textAlign: TextAlign.center),
+                          offset: const Offset(68.0, 28.0),
+                          child: const Text(
+                            'ค้นหาบอร์ดเกมด้วยคุณลักษณะ',
+                            style: TextStyle(
+                              fontFamily: 'tahomo',
+                              fontSize: 20,
+                              color: Color(0xfffff5f5),
+                              fontWeight: FontWeight.w500,
+                            ),
+                            softWrap: false,
+                          ),
                         ),
                       ],
                     ),
@@ -74,6 +85,17 @@ class InsertAttScreen extends StatelessWidget {
   }
 }
 
+
+//                          Text(
+//                             'ค้นหาบอร์ดเกมด้วยคุณลักษณะ',
+//                             style: TextStyle(
+//                               fontFamily: 'tahomo',
+//                               fontSize: 20,
+//                               color: Color(0xfffff5f5),
+//                               fontWeight: FontWeight.w500,
+//                             ),
+//                           ),
+
 class dropdown extends StatefulWidget {
   const dropdown({Key? key}) : super(key: key);
 
@@ -82,109 +104,110 @@ class dropdown extends StatefulWidget {
 }
 
 class _dropdownState extends State<dropdown> {
-  final _dropdownFormKey = GlobalKey<FormState>();
-  String? dropdownValue;
-  String? dropdownValue2;
-  String? dropdownValue3;
-  List group = [];
+  int? dropdownValueMaxPlayer;
+  int? dropdownValueTime;
+  int? dropdownValueTypeBG;
 
-  _validateForm() {
-    bool _isValid = _dropdownFormKey.currentState!.validate();
-    if (_isValid) {
-      //form is valid
+  void setData() async {
+    final collection =
+        await FirebaseFirestore.instance.collection('DataBG').get();
+    List maxPYCompare = [
+      [2, 3, 4],
+      [5, 6, 7],
+      [8, 9, 10, 12, 13, 75]
+    ];
+
+    List playPRCompare = [
+      [10, 15],
+      [20, 25, 30, 35],
+      [40, 42, 45, 50, 60],
+      [80, 90, 120]
+    ];
+
+    List type = [
+      'Family',
+      'Party',
+      "Children's",
+      'Abstract',
+      'Strategy',
+      'Thematic',
+    ];
+    if (dropdownValueMaxPlayer == null ||
+        dropdownValueTime == null ||
+        dropdownValueTypeBG == null) {
+      print("null");
+    } else {
+      setState(() {
+        int indexMaxplayer = dropdownValueMaxPlayer!;
+        int indexPlaytime = dropdownValueTime!;
+        int indexType = dropdownValueTypeBG!;
+
+        nameBGList.clear();
+        imageBGList.clear();
+        for (var element in collection.docs) {
+          if (element['typeBoardGame'] == type[indexType]) {
+            for (var i in maxPYCompare[indexMaxplayer]) {
+              if (element['maximumNumberOfPlayers'] == i) {
+                for (var j in playPRCompare[indexPlaytime]) {
+                  if (element['playTimePerRound'] == j) {
+                    nameBGList.add(element['nameBoardGame']);
+                    imageBGList.add(element['boardgameimages']);
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+      print(nameBGList);
     }
-  }
-
-  void _addGroup() {
-    setState(() {
-      group = [dropdownValue, dropdownValue2, dropdownValue3];
-      print(group);
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _dropdownFormKey,
-      body: Center(
+      body: Form(
         child: Container(
           alignment: Alignment.center,
-          color: Color.fromARGB(217, 223, 159, 48),
+          color: const Color.fromARGB(217, 223, 159, 48),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+            children: [
               Container(
                 width: 200,
-                padding: EdgeInsets.only(left: 16, right: 16),
+                padding: const EdgeInsets.only(left: 16, right: 16),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(50)),
-                child: DropdownButton<String>(
-                  borderRadius: BorderRadius.circular(30),
-                  dropdownColor: Colors.white,
-                  hint: Text("จำนวนผู้เล่น"),
-                  value: dropdownValue,
-                  icon: const Icon(Icons.arrow_drop_down),
-                  elevation: 16,
-                  isExpanded: true,
-                  underline: SizedBox(),
-                  style: const TextStyle(fontSize: 20, color: Colors.black),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownValue = newValue!;
-                    });
-                  },
-                  items: <String>['2-4', '5-7', '8 คนขี้นไป']
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(
-                        value,
-                        style: const TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              Container(
-                width: 200,
-                padding: EdgeInsets.only(left: 16, right: 16),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(50)),
-                child: DropdownButton<String>(
+                child: DropdownButton(
                   borderRadius: BorderRadius.circular(20),
                   dropdownColor: Colors.white,
-                  hint: Text("เวลาที่เล่น(นาที)"),
-                  value: dropdownValue2,
+                  hint: const Text("จำนวนผู้เล่น"),
+                  value: dropdownValueMaxPlayer,
                   icon: const Icon(Icons.arrow_drop_down),
                   elevation: 16,
                   isExpanded: true,
-                  underline: SizedBox(),
-                  style: const TextStyle(fontSize: 20, color: Colors.black),
-                  // validator: (value) => value == null ? "Select a country" : null,
-                  onChanged: (String? newValue) {
+                  underline: const SizedBox(),
+                  style: const TextStyle(color: Colors.black),
+                  items: const [
+                    DropdownMenuItem(
+                      child: Text("2-4"),
+                      value: 0,
+                    ),
+                    DropdownMenuItem(
+                      child: Text("5-7"),
+                      value: 1,
+                    ),
+                    DropdownMenuItem(
+                      child: Text("8 คนขึ้นไป"),
+                      value: 2,
+                    )
+                  ],
+                  onChanged: (int? newValue) {
                     setState(() {
-                      dropdownValue2 = newValue!;
+                      dropdownValueMaxPlayer = newValue;
                     });
                   },
-                  items: <String>['5-15', '20-30', '45-60', '60 นาทีขี้นไป']
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(
-                        value,
-                        style: const TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                    );
-                  }).toList(),
                 ),
               ),
               const SizedBox(
@@ -196,67 +219,117 @@ class _dropdownState extends State<dropdown> {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(50)),
-                child: DropdownButton<String>(
+                child: DropdownButton(
                   borderRadius: BorderRadius.circular(20),
                   dropdownColor: Colors.white,
-                  hint: Text("ประเภทเกม"),
-                  value: dropdownValue3,
+                  hint: const Text("เวลาที่เล่น"),
+                  value: dropdownValueTime,
                   icon: const Icon(Icons.arrow_drop_down),
                   elevation: 16,
                   isExpanded: true,
-                  underline: SizedBox(),
-                  style: const TextStyle(fontSize: 20, color: Colors.black),
-                  onChanged: (String? newValue) {
+                  underline: const SizedBox(),
+                  style: const TextStyle(color: Colors.black),
+                  items: const [
+                    DropdownMenuItem(
+                      child: Text("10-15"),
+                      value: 0,
+                    ),
+                    DropdownMenuItem(
+                      child: Text("20-35"),
+                      value: 1,
+                    ),
+                    DropdownMenuItem(
+                      child: Text("40-60"),
+                      value: 2,
+                    ),
+                    DropdownMenuItem(
+                      child: Text("80-120"),
+                      value: 3,
+                    )
+                  ],
+                  onChanged: (int? newValue) {
                     setState(() {
-                      dropdownValue3 = newValue!;
+                      dropdownValueTime = newValue;
                     });
                   },
-                  items: <String>[
-                    'Family',
-                    'Party',
-                    "Children's",
-                    'Abstract',
-                    'Strategy',
-                    'Thematic',
-                  ].map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(
-                        value,
-                        style: const TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                    );
-                  }).toList(),
                 ),
               ),
               const SizedBox(
                 height: 50,
               ),
               Container(
-                width: 150,
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // _validateForm();
-                    _addGroup;
-                  },
-                  child: const Text(
-                    'ค้นหา',
-                    style: TextStyle(
-                      fontSize: 20,
+                width: 200,
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(50)),
+                child: DropdownButton(
+                  borderRadius: BorderRadius.circular(20),
+                  dropdownColor: Colors.white,
+                  hint: const Text("ประเภทเกม"),
+                  value: dropdownValueTypeBG,
+                  icon: const Icon(Icons.arrow_drop_down),
+                  elevation: 16,
+                  isExpanded: true,
+                  underline: const SizedBox(),
+                  style: const TextStyle(color: Colors.black),
+                  items: const [
+                    DropdownMenuItem(
+                      child: Text("Family"),
+                      value: 0,
                     ),
-                  ),
+                    DropdownMenuItem(
+                      child: Text("Party"),
+                      value: 1,
+                    ),
+                    DropdownMenuItem(
+                      child: Text("Children's"),
+                      value: 3,
+                    ),
+                    DropdownMenuItem(
+                      child: Text("Abstract"),
+                      value: 4,
+                    ),
+                    DropdownMenuItem(
+                      child: Text("Thematic"),
+                      value: 5,
+                    ),
+                  ],
+                  onChanged: (int? newValue) {
+                    setState(() {
+                      dropdownValueTypeBG = newValue;
+                    });
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              Container(
+                width: 100,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    setData();
+                    print("OnPressed : ACtive");
+                    Timer(const Duration(seconds: 2), () {
+                      setState(() {
+                        // setData();
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return selectBG();
+                        }));
+                      });
+                    });
+                  },
+                  child: const Text('ค้นหา'),
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.white),
                     foregroundColor:
                         MaterialStateProperty.all<Color>(Colors.black),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          side: BorderSide(width: 4, color: Colors.blue)),
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
                     ),
                   ),
                 ),

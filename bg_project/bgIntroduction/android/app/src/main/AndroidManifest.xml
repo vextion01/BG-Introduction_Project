@@ -16,6 +16,7 @@
     </intent>
 </queries>
    <application
+        
         android:label="bg_introducetion"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

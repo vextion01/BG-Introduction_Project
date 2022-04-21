@@ -1,49 +1,41 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bg_introducetion/insert_name_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:adobe_xd/page_link.dart';
-import './mian_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:bg_introducetion/mian_screen.dart';
+import 'package:bg_introducetion/SelectBG.dart';
+import 'SelectBG.dart';
 import 'dart:math';
 
-class MoreInfo extends StatefulWidget {
-  const MoreInfo({Key? key}) : super(key: key);
-
+class ShowDataDropdown extends StatefulWidget {
+  final String imageBG;
+  final String nameBG;
+  final String linkBG;
+  final String maxPYBG;
+  final String timeBG;
+  final String typeBG;
+  final String youtubeBG;
+  const ShowDataDropdown({
+    Key? key,
+    required this.imageBG,
+    required this.nameBG,
+    required this.linkBG,
+    required this.maxPYBG,
+    required this.timeBG,
+    required this.typeBG,
+    required this.youtubeBG,
+  }) : super(key: key);
   @override
-  ResultRansominfo createState() => ResultRansominfo();
+  State<ShowDataDropdown> createState() => _ShowDataDropdownState();
 }
 
-class ResultRansominfo extends State<MoreInfo> {
-  String nameBG = 'nameBoardGame';
-  String linkBG = 'howToPlayLink';
-  String maxPYBG = 'maximumNumberOfPlayers';
-  String imageBG = 'boardgameimages';
-  String timeBG = 'playTimePerRound';
-  String typeBG = 'typeBoardGame';
-  String youtubeBG = 'youtubeLink';
-  int i = 0;
-  getData() async {
-    final collection =
-        await FirebaseFirestore.instance.collection('DataBG').get();
-    var element = collection.docs[Random().nextInt(collection.size)];
-    setState(() {
-      nameBG = element['nameBoardGame'];
-      linkBG = element['howToPlayLink'];
-      maxPYBG = element['maximumNumberOfPlayers'].toString();
-      imageBG = element['boardgameimages'];
-      timeBG = element['playTimePerRound'].toString();
-      typeBG = element['typeBoardGame'];
-      youtubeBG = element['youtubeLink'];
-    });
-  }
-
+class _ShowDataDropdownState extends State<ShowDataDropdown> {
   @override
   Widget build(BuildContext context) {
-    if (i == 0) {
-      getData();
-      i++;
-    }
     return Scaffold(
       backgroundColor: const Color(0xffe8b154),
       body: Stack(
@@ -60,10 +52,11 @@ class ResultRansominfo extends State<MoreInfo> {
                   iconSize: 100,
                   onPressed: () async {
                     //youtubeLink
-                    String url = youtubeBG;
+                    String url = widget.youtubeBG;
                     var urllaunchable = await canLaunch(
                         url); //canLaunch is from url_launcher package
                     if (urllaunchable) {
+                      print("URL is launched : " + url);
                       await launch(
                           url); //launch is from url_launcher package to launch URL
                     } else {
@@ -83,7 +76,7 @@ class ResultRansominfo extends State<MoreInfo> {
                   transition: LinkTransition.Fade,
                   ease: Curves.easeOut,
                   duration: 0.3,
-                  pageBuilder: () => const MianScreen(),
+                  pageBuilder: () => MianScreen(),
                 ),
               ],
               child: SvgPicture.string(
@@ -137,7 +130,7 @@ class ResultRansominfo extends State<MoreInfo> {
                       iconSize: 100,
                       onPressed: () async {
                         //website link
-                        String url = linkBG;
+                        String url = widget.linkBG;
                         var urllaunchable = await canLaunch(
                             url); //canLaunch is from url_launcher package
                         if (urllaunchable) {
@@ -173,8 +166,11 @@ class ResultRansominfo extends State<MoreInfo> {
                 children: <Widget>[
                   Container(
                     decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(imageBG), fit: BoxFit.cover)),
+                      image: DecorationImage(
+                        image: NetworkImage(widget.imageBG),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -196,7 +192,7 @@ class ResultRansominfo extends State<MoreInfo> {
                   Pin(size: 200.0, start: 0.0),
                   Pin(size: 30.0, middle: 0.2000),
                   child: const Text(
-                    'จำนวนผู้เล่นสูงสุด(คน) : ',
+                    'จำนวนผู้เล่นสูงสุด(คน) : ', //'จำนวนผู้เล่นสูงสุด(คน) : '
                     style: TextStyle(
                       fontFamily: 'tahomo',
                       fontSize: 20,
@@ -211,7 +207,7 @@ class ResultRansominfo extends State<MoreInfo> {
                   Pin(size: 34.0, start: 300.0),
                   Pin(size: 30.0, middle: 0.225),
                   child: Text(
-                    maxPYBG,
+                    widget.maxPYBG, // maximumNumberOfPlayers
                     style: const TextStyle(
                       fontFamily: 'tahomo',
                       fontSize: 20,
@@ -241,7 +237,7 @@ class ResultRansominfo extends State<MoreInfo> {
                   Pin(size: 34.0, start: 300.0),
                   Pin(size: 30.0, middle: 0.425),
                   child: Text(
-                    timeBG,
+                    widget.timeBG,
                     style: const TextStyle(
                       fontFamily: 'tahomo',
                       fontSize: 20,
@@ -271,7 +267,7 @@ class ResultRansominfo extends State<MoreInfo> {
                   Pin(size: 100.0, start: 275.0),
                   Pin(size: 30.0, middle: 0.625),
                   child: Text(
-                    typeBG,
+                    widget.typeBG,
                     style: const TextStyle(
                       fontFamily: 'tahomo',
                       fontSize: 20,
@@ -291,19 +287,20 @@ class ResultRansominfo extends State<MoreInfo> {
             child: Stack(
               children: <Widget>[
                 Align(
+                  alignment: Alignment(5.25, 0),
                   child: SizedBox(
                     width: 300.0,
                     height: 22.0,
-                    child: Text(nameBG,
-                        style: const TextStyle(
-                          fontFamily: 'tahomo',
-                          fontSize: 20,
-                          color: Color(0xfffff5f5),
-                          fontWeight: FontWeight.w500,
-                        ),
-                        // textAlign: TextAlign.center,
-                        softWrap: false,
-                        textAlign: TextAlign.center),
+                    child: Text(
+                      widget.nameBG,
+                      style: const TextStyle(
+                        fontFamily: 'tahomo',
+                        fontSize: 20,
+                        color: Color(0xfffff5f5),
+                        fontWeight: FontWeight.w500,
+                      ),
+                      softWrap: false,
+                    ),
                   ),
                 ),
                 Pinned.fromPins(
@@ -318,37 +315,39 @@ class ResultRansominfo extends State<MoreInfo> {
               ],
             ),
           ),
-          //_svg_rlb0e
           Align(
-            alignment: Alignment(0.0, 0.006),
+            alignment: Alignment(0.0, 0.013),
             child: SizedBox(
               width: 237.0,
-              height: 24.0,
+              height: 20.0,
               child: Stack(
                 children: <Widget>[
-                  Pinned.fromPins(
-                    Pin(start: 0.0, end: 0.0),
-                    Pin(size: 1.0, end: -1.0),
-                    child: SvgPicture.string(
-                      _svg_rlb0e,
-                      allowDrawingOutsideViewBox: true,
-                      fit: BoxFit.fill,
+                  Transform.translate(
+                    offset: Offset(0.0, 20.0),
+                    child: SizedBox(
+                      width: 237.0,
+                      height: 1.0,
+                      child: SvgPicture.string(
+                        _svg_rlb0e,
+                        allowDrawingOutsideViewBox: true,
+                      ),
                     ),
                   ),
                   const Align(
-                    alignment: Alignment(0.012, -1.0),
+                    alignment: Alignment(0.119, -1.0),
                     child: SizedBox(
-                      width: 155.0,
-                      height: 22.0,
-                      child: Text('รายละเอียดบอร์ดเกม',
-                          style: TextStyle(
-                            fontFamily: 'tahomo',
-                            fontSize: 20,
-                            color: Color(0xfffff5f5),
-                            fontWeight: FontWeight.w500,
-                          ),
-                          softWrap: false,
-                          textAlign: TextAlign.center),
+                      width: 150.0,
+                      height: 20.0,
+                      child: Text(
+                        'รายละเอียดบอร์ดเกม   ',
+                        style: TextStyle(
+                          fontFamily: 'tahomo',
+                          fontSize: 16,
+                          color: Color(0xfffff5f5),
+                          fontWeight: FontWeight.w500,
+                        ),
+                        softWrap: false,
+                      ),
                     ),
                   ),
                 ],
@@ -358,23 +357,35 @@ class ResultRansominfo extends State<MoreInfo> {
           Pinned.fromPins(
             Pin(start: 0.0, end: 0.0),
             Pin(size: 78.0, start: 0.0),
-            child: Container(
-              color: const Color(0xffe18721),
+            child: Stack(
+              children: <Widget>[
+                Stack(
+                  children: <Widget>[
+                    Container(
+                      color: const Color(0xffe18721),
+                    ),
+                    const Align(
+                      alignment: Alignment(0.25, 0.0),
+                      child: SizedBox(
+                        width: 250.0,
+                        height: 22.0,
+                        child: Text(
+                          'รายละเอียดของบอร์ดเกม   ',
+                          style: TextStyle(
+                            fontFamily: 'tahomo',
+                            fontSize: 20,
+                            color: Color(0xfffff5f5),
+                            fontWeight: FontWeight.w500,
+                          ),
+                          softWrap: false,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
-          Pinned.fromPins(
-            Pin(size: 221.0, middle: 0.5036),
-            Pin(size: 26.0, start: 25.0),
-            child: const Text('รายละเอียดของบอร์ดเกม',
-                style: TextStyle(
-                  fontFamily: 'tahomo',
-                  fontSize: 24,
-                  color: Color(0xfffff5f5),
-                  fontWeight: FontWeight.w500,
-                ),
-                softWrap: false,
-                textAlign: TextAlign.center),
-          ), //
         ],
       ),
     );

@@ -3,11 +3,11 @@ import 'package:adobe_xd/pinned.dart';
 import './mian_screen.dart';
 import 'package:adobe_xd/page_link.dart';
 import './insert_name_screen.dart';
-import './insert_att_screen.dart';
+import 'insert_att_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class FindBGScreen extends StatelessWidget {
-  FindBGScreen({
+  const FindBGScreen({
     Key? key,
   }) : super(key: key);
   @override
@@ -34,9 +34,9 @@ class FindBGScreen extends StatelessWidget {
             Pin(start: 10.0, end: 9.0),
             Pin(size: 206.0, middle: 0.2465),
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: const AssetImage('assets/images/logo.png'),
+                  image: AssetImage('assets/images/logo.png'),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -51,11 +51,11 @@ class FindBGScreen extends StatelessWidget {
                   transition: LinkTransition.Fade,
                   ease: Curves.easeOut,
                   duration: 0.3,
-                  pageBuilder: () => MianScreen(),
+                  pageBuilder: () => const MianScreen(),
                 ),
               ],
               child: Container(
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
               ),
             ),
           ),
@@ -68,7 +68,7 @@ class FindBGScreen extends StatelessWidget {
                   transition: LinkTransition.Fade,
                   ease: Curves.easeOut,
                   duration: 0.3,
-                  pageBuilder: () => MianScreen(),
+                  pageBuilder: () => const MianScreen(),
                 ),
               ],
               child: Container(
@@ -90,7 +90,7 @@ class FindBGScreen extends StatelessWidget {
               color: const Color(0xff332f2f),
             ),
           ),
-          Align(
+          const Align(
             alignment: Alignment(0.0, 0.203),
             child: SizedBox(
               width: 154.0,
@@ -100,7 +100,7 @@ class FindBGScreen extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'Tahoma',
                   fontSize: 25,
-                  color: const Color(0xfffff5f5),
+                  color: Color(0xfffff5f5),
                 ),
                 softWrap: false,
               ),
@@ -113,7 +113,7 @@ class FindBGScreen extends StatelessWidget {
               color: const Color(0xffe38f00),
             ),
           ),
-          Align(
+          const Align(
             alignment: Alignment(0.015, 0.21),
             child: SizedBox(
               width: 157.0,
@@ -123,7 +123,7 @@ class FindBGScreen extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'tahomo',
                   fontSize: 25,
-                  color: const Color(0xfffff5f5),
+                  color: Color(0xfffff5f5),
                   fontWeight: FontWeight.w500,
                 ),
                 softWrap: false,
@@ -144,7 +144,7 @@ class FindBGScreen extends StatelessWidget {
                         transition: LinkTransition.Fade,
                         ease: Curves.easeOut,
                         duration: 0.3,
-                        pageBuilder: () => InsertNameScreen(),
+                        pageBuilder: () => const InsertNameScreen(),
                       ),
                     ],
                     child: Stack(
@@ -164,12 +164,12 @@ class FindBGScreen extends StatelessWidget {
                         Pinned.fromPins(
                           Pin(start: 34.0, end: 34.0),
                           Pin(size: 25.0, middle: 0.56),
-                          child: Text(
+                          child: const Text(
                             'ค้นหาด้วยชื่อ',
                             style: TextStyle(
                               fontFamily: 'tahomo',
                               fontSize: 22.5,
-                              color: const Color(0xff000000),
+                              color: Color(0xff000000),
                               fontWeight: FontWeight.w500,
                             ),
                             textAlign: TextAlign.center,
@@ -210,12 +210,12 @@ class FindBGScreen extends StatelessWidget {
                             Pinned.fromPins(
                               Pin(start: 1.0, end: 0.6),
                               Pin(size: 25.0, middle: 0.52),
-                              child: Text(
+                              child: const Text(
                                 'ค้นหาคุณลักษณะ',
                                 style: TextStyle(
                                   fontFamily: 'tahomo',
                                   fontSize: 22.5,
-                                  color: const Color(0xff000000),
+                                  color: Color(0xff000000),
                                   fontWeight: FontWeight.w500,
                                 ),
                                 textAlign: TextAlign.center,
@@ -239,7 +239,7 @@ class FindBGScreen extends StatelessWidget {
                   transition: LinkTransition.Fade,
                   ease: Curves.easeOut,
                   duration: 0.3,
-                  pageBuilder: () => MianScreen(),
+                  pageBuilder: () => const MianScreen(),
                 ),
               ],
               child: SvgPicture.string(
