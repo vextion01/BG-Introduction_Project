@@ -56,7 +56,6 @@ class _ShowDataDropdownState extends State<ShowDataDropdown> {
                     var urllaunchable = await canLaunch(
                         url); //canLaunch is from url_launcher package
                     if (urllaunchable) {
-                      print("URL is launched : " + url);
                       await launch(
                           url); //launch is from url_launcher package to launch URL
                     } else {
@@ -76,7 +75,7 @@ class _ShowDataDropdownState extends State<ShowDataDropdown> {
                   transition: LinkTransition.Fade,
                   ease: Curves.easeOut,
                   duration: 0.3,
-                  pageBuilder: () => MianScreen(),
+                  pageBuilder: () => const MianScreen(),
                 ),
               ],
               child: SvgPicture.string(
@@ -166,11 +165,10 @@ class _ShowDataDropdownState extends State<ShowDataDropdown> {
                 children: <Widget>[
                   Container(
                     decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(widget.imageBG),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
+                        image: DecorationImage(
+                      image: NetworkImage(widget.imageBG),
+                      // fit: BoxFit.cover
+                    )),
                   ),
                 ],
               ),
@@ -192,7 +190,7 @@ class _ShowDataDropdownState extends State<ShowDataDropdown> {
                   Pin(size: 200.0, start: 0.0),
                   Pin(size: 30.0, middle: 0.2000),
                   child: const Text(
-                    'จำนวนผู้เล่นสูงสุด(คน) : ', //'จำนวนผู้เล่นสูงสุด(คน) : '
+                    'จำนวนผู้เล่นสูงสุด(คน) : ',
                     style: TextStyle(
                       fontFamily: 'tahomo',
                       fontSize: 20,
@@ -207,7 +205,7 @@ class _ShowDataDropdownState extends State<ShowDataDropdown> {
                   Pin(size: 34.0, start: 300.0),
                   Pin(size: 30.0, middle: 0.225),
                   child: Text(
-                    widget.maxPYBG, // maximumNumberOfPlayers
+                    widget.maxPYBG,
                     style: const TextStyle(
                       fontFamily: 'tahomo',
                       fontSize: 20,
@@ -287,20 +285,19 @@ class _ShowDataDropdownState extends State<ShowDataDropdown> {
             child: Stack(
               children: <Widget>[
                 Align(
-                  alignment: Alignment(5.25, 0),
                   child: SizedBox(
                     width: 300.0,
                     height: 22.0,
-                    child: Text(
-                      widget.nameBG,
-                      style: const TextStyle(
-                        fontFamily: 'tahomo',
-                        fontSize: 20,
-                        color: Color(0xfffff5f5),
-                        fontWeight: FontWeight.w500,
-                      ),
-                      softWrap: false,
-                    ),
+                    child: Text(widget.nameBG,
+                        style: const TextStyle(
+                          fontFamily: 'tahomo',
+                          fontSize: 20,
+                          color: Color(0xfffff5f5),
+                          fontWeight: FontWeight.w500,
+                        ),
+                        // textAlign: TextAlign.center,
+                        softWrap: false,
+                        textAlign: TextAlign.center),
                   ),
                 ),
                 Pinned.fromPins(
@@ -315,39 +312,37 @@ class _ShowDataDropdownState extends State<ShowDataDropdown> {
               ],
             ),
           ),
+          //_svg_rlb0e
           Align(
-            alignment: Alignment(0.0, 0.013),
+            alignment: Alignment(0.0, 0.006),
             child: SizedBox(
               width: 237.0,
-              height: 20.0,
+              height: 24.0,
               child: Stack(
                 children: <Widget>[
-                  Transform.translate(
-                    offset: Offset(0.0, 20.0),
-                    child: SizedBox(
-                      width: 237.0,
-                      height: 1.0,
-                      child: SvgPicture.string(
-                        _svg_rlb0e,
-                        allowDrawingOutsideViewBox: true,
-                      ),
+                  Pinned.fromPins(
+                    Pin(start: 0.0, end: 0.0),
+                    Pin(size: 1.0, end: -1.0),
+                    child: SvgPicture.string(
+                      _svg_rlb0e,
+                      allowDrawingOutsideViewBox: true,
+                      fit: BoxFit.fill,
                     ),
                   ),
                   const Align(
-                    alignment: Alignment(0.119, -1.0),
+                    alignment: Alignment(0.012, -1.0),
                     child: SizedBox(
-                      width: 150.0,
-                      height: 20.0,
-                      child: Text(
-                        'รายละเอียดบอร์ดเกม   ',
-                        style: TextStyle(
-                          fontFamily: 'tahomo',
-                          fontSize: 16,
-                          color: Color(0xfffff5f5),
-                          fontWeight: FontWeight.w500,
-                        ),
-                        softWrap: false,
-                      ),
+                      width: 155.0,
+                      height: 22.0,
+                      child: Text('รายละเอียดบอร์ดเกม',
+                          style: TextStyle(
+                            fontFamily: 'tahomo',
+                            fontSize: 20,
+                            color: Color(0xfffff5f5),
+                            fontWeight: FontWeight.w500,
+                          ),
+                          softWrap: false,
+                          textAlign: TextAlign.center),
                     ),
                   ),
                 ],
@@ -357,35 +352,23 @@ class _ShowDataDropdownState extends State<ShowDataDropdown> {
           Pinned.fromPins(
             Pin(start: 0.0, end: 0.0),
             Pin(size: 78.0, start: 0.0),
-            child: Stack(
-              children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                    Container(
-                      color: const Color(0xffe18721),
-                    ),
-                    const Align(
-                      alignment: Alignment(0.25, 0.0),
-                      child: SizedBox(
-                        width: 250.0,
-                        height: 22.0,
-                        child: Text(
-                          'รายละเอียดของบอร์ดเกม   ',
-                          style: TextStyle(
-                            fontFamily: 'tahomo',
-                            fontSize: 20,
-                            color: Color(0xfffff5f5),
-                            fontWeight: FontWeight.w500,
-                          ),
-                          softWrap: false,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+            child: Container(
+              color: const Color(0xffe18721),
             ),
           ),
+          Pinned.fromPins(
+            Pin(size: 221.0, middle: 0.5036),
+            Pin(size: 26.0, start: 25.0),
+            child: const Text('รายละเอียดของบอร์ดเกม',
+                style: TextStyle(
+                  fontFamily: 'tahomo',
+                  fontSize: 24,
+                  color: Color(0xfffff5f5),
+                  fontWeight: FontWeight.w500,
+                ),
+                softWrap: false,
+                textAlign: TextAlign.center),
+          ), //
         ],
       ),
     );

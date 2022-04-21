@@ -48,9 +48,17 @@ class _selectBGState extends State<selectBG> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange,
-        title: Text('SelectBoardgame'),
-      ),
+        backgroundColor: const Color(0xffe18721),
+        title: const Text('ผลลัพธ์จากการค้นหา',
+            style: TextStyle(
+              fontFamily: 'tahomo',
+              fontSize: 24,
+              color: Color(0xfffff5f5),
+              fontWeight: FontWeight.w500,
+            ),
+            softWrap: false,
+            textAlign: TextAlign.center),
+      ), //ผลลัพธ์จากการค้นหา
       body: ListView.builder(
           itemCount: nameBGList.length,
           itemBuilder: (context, i) {
@@ -63,7 +71,6 @@ class _selectBGState extends State<selectBG> {
                 onTap: () {
                   getDataSelect(nameBGList[i]);
                   Timer(Duration(seconds: 1), () {
-                    
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -77,10 +84,6 @@ class _selectBGState extends State<selectBG> {
                                   youtubeBG: _selectBGState.youtubeBG,
                                 )));
                   });
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => ShowDataDropdown()));
                 },
               ),
             );

@@ -50,51 +50,28 @@ class InsertAttScreen extends StatelessWidget {
           Pinned.fromPins(
             Pin(start: 0.0, end: 0.0),
             Pin(size: 78.0, start: 0.0),
-            child: Stack(
-              children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                    Stack(
-                      children: <Widget>[
-                        Container(
-                          color: const Color(0xffe18721),
-                        ),
-                        Transform.translate(
-                          offset: const Offset(68.0, 28.0),
-                          child: const Text(
-                            'ค้นหาบอร์ดเกมด้วยคุณลักษณะ',
-                            style: TextStyle(
-                              fontFamily: 'tahomo',
-                              fontSize: 20,
-                              color: Color(0xfffff5f5),
-                              fontWeight: FontWeight.w500,
-                            ),
-                            softWrap: false,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+            child: Container(
+              color: const Color(0xffe18721),
             ),
+          ),
+          Pinned.fromPins(
+            Pin(size: 221.0, middle: 0.5036),
+            Pin(size: 26.0, start: 25.0),
+            child: const Text('รายละเอียดของบอร์ดเกม',
+                style: TextStyle(
+                  fontFamily: 'tahomo',
+                  fontSize: 24,
+                  color: Color(0xfffff5f5),
+                  fontWeight: FontWeight.w500,
+                ),
+                softWrap: false,
+                textAlign: TextAlign.center),
           ),
         ],
       ),
     );
   }
 }
-
-
-//                          Text(
-//                             'ค้นหาบอร์ดเกมด้วยคุณลักษณะ',
-//                             style: TextStyle(
-//                               fontFamily: 'tahomo',
-//                               fontSize: 20,
-//                               color: Color(0xfffff5f5),
-//                               fontWeight: FontWeight.w500,
-//                             ),
-//                           ),
 
 class dropdown extends StatefulWidget {
   const dropdown({Key? key}) : super(key: key);
@@ -107,6 +84,35 @@ class _dropdownState extends State<dropdown> {
   int? dropdownValueMaxPlayer;
   int? dropdownValueTime;
   int? dropdownValueTypeBG;
+
+  void showNullDropdownDialog(BuildContext context) => showDialog(
+      builder: (context) => SimpleDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            titlePadding: EdgeInsets.all(20),
+            title: const Text('กรุณาเลือกคุณลักษณะให้ครบ',
+                style: TextStyle(
+                  fontSize: 22,
+                  color: Colors.red,
+                  fontWeight: FontWeight.w500,
+                ),
+                textAlign: TextAlign.center),
+          ),
+      context: context);
+  void showNullResultDropdownDialog(BuildContext context) => showDialog(
+      builder: (context) => SimpleDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            titlePadding: EdgeInsets.all(20),
+            title: const Text('ไม่มีผลลัพธ์จากการค้นหา',
+                style: TextStyle(
+                  fontSize: 22,
+                  color: Colors.red,
+                  fontWeight: FontWeight.w500,
+                ),
+                textAlign: TextAlign.center),
+          ),
+      context: context);
 
   void setData() async {
     final collection =
@@ -129,19 +135,15 @@ class _dropdownState extends State<dropdown> {
       'Party',
       "Children's",
       'Abstract',
-      'Strategy',
       'Thematic',
+      'Strategy',
     ];
-    if (dropdownValueMaxPlayer == null ||
-        dropdownValueTime == null ||
-        dropdownValueTypeBG == null) {
-      print("null");
-    } else {
-      setState(() {
+
+    setState(() {
+      try {
         int indexMaxplayer = dropdownValueMaxPlayer!;
         int indexPlaytime = dropdownValueTime!;
         int indexType = dropdownValueTypeBG!;
-
         nameBGList.clear();
         imageBGList.clear();
         for (var element in collection.docs) {
@@ -158,9 +160,13 @@ class _dropdownState extends State<dropdown> {
             }
           }
         }
-      });
-      print(nameBGList);
-    }
+        print(nameBGList);
+      } on Exception catch (exception) {
+        print("Someting Wrong");
+      } catch (e) {
+        print('Something really unknown: $e');
+      }
+    });
   }
 
   @override
@@ -181,8 +187,13 @@ class _dropdownState extends State<dropdown> {
                     borderRadius: BorderRadius.circular(50)),
                 child: DropdownButton(
                   borderRadius: BorderRadius.circular(20),
-                  dropdownColor: Colors.white,
-                  hint: const Text("จำนวนผู้เล่น"),
+                  dropdownColor: Colors.white, //
+                  hint: const Text(
+                    "จำนวนผู้เล่น",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
                   value: dropdownValueMaxPlayer,
                   icon: const Icon(Icons.arrow_drop_down),
                   elevation: 16,
@@ -191,15 +202,30 @@ class _dropdownState extends State<dropdown> {
                   style: const TextStyle(color: Colors.black),
                   items: const [
                     DropdownMenuItem(
-                      child: Text("2-4"),
+                      child: Text(
+                        "2-4",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
                       value: 0,
                     ),
                     DropdownMenuItem(
-                      child: Text("5-7"),
+                      child: Text(
+                        "5-7",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
                       value: 1,
                     ),
                     DropdownMenuItem(
-                      child: Text("8 คนขึ้นไป"),
+                      child: Text(
+                        "8 คนขึ้นไป",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
                       value: 2,
                     )
                   ],
@@ -222,7 +248,12 @@ class _dropdownState extends State<dropdown> {
                 child: DropdownButton(
                   borderRadius: BorderRadius.circular(20),
                   dropdownColor: Colors.white,
-                  hint: const Text("เวลาที่เล่น"),
+                  hint: const Text(
+                    "เวลาที่เล่น",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
                   value: dropdownValueTime,
                   icon: const Icon(Icons.arrow_drop_down),
                   elevation: 16,
@@ -231,19 +262,39 @@ class _dropdownState extends State<dropdown> {
                   style: const TextStyle(color: Colors.black),
                   items: const [
                     DropdownMenuItem(
-                      child: Text("10-15"),
+                      child: Text(
+                        "10-15",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
                       value: 0,
                     ),
                     DropdownMenuItem(
-                      child: Text("20-35"),
+                      child: Text(
+                        "20-35",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
                       value: 1,
                     ),
                     DropdownMenuItem(
-                      child: Text("40-60"),
+                      child: Text(
+                        "40-60",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
                       value: 2,
                     ),
                     DropdownMenuItem(
-                      child: Text("80-120"),
+                      child: Text(
+                        "80-120",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
                       value: 3,
                     )
                   ],
@@ -266,7 +317,12 @@ class _dropdownState extends State<dropdown> {
                 child: DropdownButton(
                   borderRadius: BorderRadius.circular(20),
                   dropdownColor: Colors.white,
-                  hint: const Text("ประเภทเกม"),
+                  hint: const Text(
+                    "ประเภทเกม",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
                   value: dropdownValueTypeBG,
                   icon: const Icon(Icons.arrow_drop_down),
                   elevation: 16,
@@ -275,23 +331,57 @@ class _dropdownState extends State<dropdown> {
                   style: const TextStyle(color: Colors.black),
                   items: const [
                     DropdownMenuItem(
-                      child: Text("Family"),
+                      child: Text(
+                        "Family",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
                       value: 0,
                     ),
                     DropdownMenuItem(
-                      child: Text("Party"),
+                      child: Text(
+                        "Party",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
                       value: 1,
                     ),
                     DropdownMenuItem(
-                      child: Text("Children's"),
+                      child: Text(
+                        "Children",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      value: 2,
+                    ),
+                    DropdownMenuItem(
+                      child: Text(
+                        "Abstract",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
                       value: 3,
                     ),
                     DropdownMenuItem(
-                      child: Text("Abstract"),
+                      child: Text(
+                        "Thematic",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
                       value: 4,
                     ),
                     DropdownMenuItem(
-                      child: Text("Thematic"),
+                      child: Text(
+                        "Strategy",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
                       value: 5,
                     ),
                   ],
@@ -306,30 +396,44 @@ class _dropdownState extends State<dropdown> {
                 height: 50,
               ),
               Container(
-                width: 100,
+                width: 175,
+                height: 50,
                 child: ElevatedButton(
                   onPressed: () async {
-                    setData();
                     print("OnPressed : ACtive");
+                    setData();
                     Timer(const Duration(seconds: 2), () {
-                      setState(() {
-                        // setData();
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return selectBG();
-                        }));
-                      });
+                      if (dropdownValueMaxPlayer == null ||
+                          dropdownValueTime == null ||
+                          dropdownValueTypeBG == null) {
+                        showNullDropdownDialog(context);
+                      } else if (nameBGList.isEmpty == true) {
+                        showNullResultDropdownDialog(context);
+                      } else {
+                        setState(() {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return selectBG();
+                          }));
+                        });
+                      }
                     });
                   },
-                  child: const Text('ค้นหา'),
+                  child: const Text(
+                    'ค้นหา',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
                   style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.white),
                     foregroundColor:
                         MaterialStateProperty.all<Color>(Colors.black),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
+                      const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          side: BorderSide(width: 4, color: Colors.blue)),
                     ),
                   ),
                 ),

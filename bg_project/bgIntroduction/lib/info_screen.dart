@@ -9,9 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class Resultinfo extends StatefulWidget {
   const Resultinfo({this.data});
-
   final QueryDocumentSnapshot<Object?>? data;
-
   @override
   InfoScreen createState() => InfoScreen();
 }
@@ -152,7 +150,7 @@ class InfoScreen extends State<Resultinfo> {
                       image: DecorationImage(
                         image:
                             NetworkImage(widget.data!.get('boardgameimages')),
-                        fit: BoxFit.fill,
+                        // fit: BoxFit.fill,
                       ),
                     ),
                   ),
@@ -271,15 +269,13 @@ class InfoScreen extends State<Resultinfo> {
             child: Stack(
               children: <Widget>[
                 Align(
-                  //alignment: Alignment(5.25, 0),
-
                   child: SizedBox(
                     width: 300.0,
                     height: 22.0,
                     child: Text(widget.data!.get('nameBoardGame'),
                         style: const TextStyle(
                           fontFamily: 'tahomo',
-                          fontSize: 20,
+                          fontSize: 22,
                           color: Color(0xfffff5f5),
                           fontWeight: FontWeight.w500,
                         ),

@@ -174,7 +174,9 @@ class ResultRansominfo extends State<MoreInfo> {
                   Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: NetworkImage(imageBG), fit: BoxFit.cover)),
+                      image: NetworkImage(imageBG),
+                      // fit: BoxFit.cover
+                    )),
                   ),
                 ],
               ),
@@ -297,7 +299,7 @@ class ResultRansominfo extends State<MoreInfo> {
                     child: Text(nameBG,
                         style: const TextStyle(
                           fontFamily: 'tahomo',
-                          fontSize: 20,
+                          fontSize: 22,
                           color: Color(0xfffff5f5),
                           fontWeight: FontWeight.w500,
                         ),
