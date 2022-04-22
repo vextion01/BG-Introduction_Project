@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
@@ -197,7 +198,7 @@ class ResultRansominfo extends State<MoreInfo> {
                 Pinned.fromPins(
                   Pin(size: 200.0, start: 0.0),
                   Pin(size: 30.0, middle: 0.2000),
-                  child: const Text(
+                  child: const AutoSizeText(
                     'จำนวนผู้เล่นสูงสุด(คน) : ',
                     style: TextStyle(
                       fontFamily: 'tahomo',
@@ -212,7 +213,7 @@ class ResultRansominfo extends State<MoreInfo> {
                 Pinned.fromPins(
                   Pin(size: 34.0, start: 300.0),
                   Pin(size: 30.0, middle: 0.225),
-                  child: Text(
+                  child: AutoSizeText(
                     maxPYBG,
                     style: const TextStyle(
                       fontFamily: 'tahomo',
@@ -227,7 +228,7 @@ class ResultRansominfo extends State<MoreInfo> {
                 Pinned.fromPins(
                   Pin(size: 300.0, start: -15.0),
                   Pin(size: 30.0, middle: 0.4000),
-                  child: const Text(
+                  child: const AutoSizeText(
                     'ระยะเวลาการเล่นต่อรอบ(นาที) : ',
                     style: TextStyle(
                       fontFamily: 'tahomo',
@@ -242,7 +243,7 @@ class ResultRansominfo extends State<MoreInfo> {
                 Pinned.fromPins(
                   Pin(size: 34.0, start: 300.0),
                   Pin(size: 30.0, middle: 0.425),
-                  child: Text(
+                  child: AutoSizeText(
                     timeBG,
                     style: const TextStyle(
                       fontFamily: 'tahomo',
@@ -257,7 +258,7 @@ class ResultRansominfo extends State<MoreInfo> {
                 Pinned.fromPins(
                   Pin(size: 200.0, start: 0.0),
                   Pin(size: 30.0, middle: 0.6000),
-                  child: const Text(
+                  child: const AutoSizeText(
                     'ประเภทของบอร์ดเกม : ',
                     style: TextStyle(
                       fontFamily: 'tahomo',
@@ -272,7 +273,7 @@ class ResultRansominfo extends State<MoreInfo> {
                 Pinned.fromPins(
                   Pin(size: 100.0, start: 275.0),
                   Pin(size: 30.0, middle: 0.625),
-                  child: Text(
+                  child: AutoSizeText(
                     typeBG,
                     style: const TextStyle(
                       fontFamily: 'tahomo',
@@ -296,7 +297,7 @@ class ResultRansominfo extends State<MoreInfo> {
                   child: SizedBox(
                     width: 300.0,
                     height: 30.0,
-                    child: Text(nameBG,
+                    child: AutoSizeText(nameBG,
                         style: const TextStyle(
                           fontFamily: 'tahomo',
                           fontSize: 24,
@@ -342,7 +343,7 @@ class ResultRansominfo extends State<MoreInfo> {
                     child: SizedBox(
                       width: 300.0,
                       height: 50.0,
-                      child: Text('รายละเอียดบอร์ดเกม',
+                      child: AutoSizeText('รายละเอียดบอร์ดเกม',
                           style: TextStyle(
                             fontFamily: 'tahomo',
                             fontSize: 24,
@@ -367,7 +368,7 @@ class ResultRansominfo extends State<MoreInfo> {
           Pinned.fromPins(
             Pin(size: 221.0, middle: 0.5036),
             Pin(size: 26.0, start: 25.0),
-            child: const Text('รายละเอียดของบอร์ดเกม',
+            child: const AutoSizeText('รายละเอียดของบอร์ดเกม',
                 style: TextStyle(
                   fontFamily: 'tahomo',
                   fontSize: 24,

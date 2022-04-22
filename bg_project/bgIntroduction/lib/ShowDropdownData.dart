@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bg_introducetion/insert_name_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -189,7 +190,7 @@ class _ShowDataDropdownState extends State<ShowDataDropdown> {
                 Pinned.fromPins(
                   Pin(size: 200.0, start: 0.0),
                   Pin(size: 30.0, middle: 0.2000),
-                  child: const Text(
+                  child: const AutoSizeText(
                     'จำนวนผู้เล่นสูงสุด(คน) : ',
                     style: TextStyle(
                       fontFamily: 'tahomo',
@@ -204,7 +205,7 @@ class _ShowDataDropdownState extends State<ShowDataDropdown> {
                 Pinned.fromPins(
                   Pin(size: 34.0, start: 300.0),
                   Pin(size: 30.0, middle: 0.225),
-                  child: Text(
+                  child: AutoSizeText(
                     widget.maxPYBG,
                     style: const TextStyle(
                       fontFamily: 'tahomo',
@@ -219,7 +220,7 @@ class _ShowDataDropdownState extends State<ShowDataDropdown> {
                 Pinned.fromPins(
                   Pin(size: 300.0, start: -15.0),
                   Pin(size: 30.0, middle: 0.4000),
-                  child: const Text(
+                  child: const AutoSizeText(
                     'ระยะเวลาการเล่นต่อรอบ(นาที) : ',
                     style: TextStyle(
                       fontFamily: 'tahomo',
@@ -234,7 +235,7 @@ class _ShowDataDropdownState extends State<ShowDataDropdown> {
                 Pinned.fromPins(
                   Pin(size: 34.0, start: 300.0),
                   Pin(size: 30.0, middle: 0.425),
-                  child: Text(
+                  child: AutoSizeText(
                     widget.timeBG,
                     style: const TextStyle(
                       fontFamily: 'tahomo',
@@ -249,7 +250,7 @@ class _ShowDataDropdownState extends State<ShowDataDropdown> {
                 Pinned.fromPins(
                   Pin(size: 200.0, start: 0.0),
                   Pin(size: 30.0, middle: 0.6000),
-                  child: const Text(
+                  child: const AutoSizeText(
                     'ประเภทของบอร์ดเกม : ',
                     style: TextStyle(
                       fontFamily: 'tahomo',
@@ -264,7 +265,7 @@ class _ShowDataDropdownState extends State<ShowDataDropdown> {
                 Pinned.fromPins(
                   Pin(size: 100.0, start: 275.0),
                   Pin(size: 30.0, middle: 0.625),
-                  child: Text(
+                  child: AutoSizeText(
                     widget.typeBG,
                     style: const TextStyle(
                       fontFamily: 'tahomo',
@@ -288,7 +289,7 @@ class _ShowDataDropdownState extends State<ShowDataDropdown> {
                   child: SizedBox(
                     width: 300.0,
                     height: 30.0,
-                    child: Text(widget.nameBG,
+                    child: AutoSizeText(widget.nameBG,
                         style: const TextStyle(
                           fontFamily: 'tahomo',
                           fontSize: 24,
@@ -334,7 +335,7 @@ class _ShowDataDropdownState extends State<ShowDataDropdown> {
                     child: SizedBox(
                       width: 300.0,
                       height: 50.0,
-                      child: Text('รายละเอียดบอร์ดเกม',
+                      child: AutoSizeText('รายละเอียดบอร์ดเกม',
                           style: TextStyle(
                             fontFamily: 'tahomo',
                             fontSize: 24,
@@ -359,7 +360,7 @@ class _ShowDataDropdownState extends State<ShowDataDropdown> {
           Pinned.fromPins(
             Pin(size: 221.0, middle: 0.5036),
             Pin(size: 26.0, start: 25.0),
-            child: const Text('รายละเอียดของบอร์ดเกม',
+            child: const AutoSizeText('รายละเอียดของบอร์ดเกม',
                 style: TextStyle(
                   fontFamily: 'tahomo',
                   fontSize: 24,

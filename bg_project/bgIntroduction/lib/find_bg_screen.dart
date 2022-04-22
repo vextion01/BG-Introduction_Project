@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import './mian_screen.dart';
@@ -95,7 +96,7 @@ class FindBGScreen extends StatelessWidget {
             child: SizedBox(
               width: 154.0,
               height: 30.0,
-              child: Text(
+              child: AutoSizeText(
                 'ค้นหาบอร์ดเกม',
                 style: TextStyle(
                   fontFamily: 'Tahoma',
@@ -118,7 +119,7 @@ class FindBGScreen extends StatelessWidget {
             child: SizedBox(
               width: 157.0,
               height: 27.0,
-              child: Text(
+              child: AutoSizeText(
                 'ค้นหาบอร์ดเกม  ',
                 style: TextStyle(
                   fontFamily: 'tahomo',
@@ -164,7 +165,7 @@ class FindBGScreen extends StatelessWidget {
                         Pinned.fromPins(
                           Pin(start: 34.0, end: 34.0),
                           Pin(size: 25.0, middle: 0.56),
-                          child: const Text(
+                          child: const AutoSizeText(
                             'ค้นหาด้วยชื่อ',
                             style: TextStyle(
                               fontFamily: 'tahomo',
@@ -210,7 +211,7 @@ class FindBGScreen extends StatelessWidget {
                             Pinned.fromPins(
                               Pin(start: 1.0, end: 0.6),
                               Pin(size: 25.0, middle: 0.52),
-                              child: const Text(
+                              child: const AutoSizeText(
                                 'ค้นหาคุณลักษณะ',
                                 style: TextStyle(
                                   fontFamily: 'tahomo',

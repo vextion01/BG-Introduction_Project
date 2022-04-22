@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bg_introducetion/info_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
@@ -73,7 +74,7 @@ class InsertNameScreen extends StatelessWidget {
                         child: SizedBox(
                           width: 156.0,
                           height: 27.0,
-                          child: Text(
+                          child: AutoSizeText(
                             'ค้นหาบอร์ดเกม  ',
                             style: TextStyle(
                               fontFamily: 'tahomo',
@@ -167,7 +168,7 @@ class CustomSearchDelegate extends SearchDelegate {
                         .contains(query.toLowerCase()))
                 .isEmpty) {
               return const Center(
-                child: Text("No search query found"),
+                child: AutoSizeText("No search query found"),
               );
             } else {
               return ListView(children: [
@@ -206,7 +207,7 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     return const Center(
-      child: Text("Search anything here"),
+      child: AutoSizeText("Search anything here"),
     );
   }
 }

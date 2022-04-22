@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bg_introducetion/MoreInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
@@ -64,7 +65,7 @@ class MianScreen extends StatelessWidget {
                       offset: Offset(34.0, 14.0),
                       child: const SizedBox(
                         width: 132.0,
-                        child: Text(
+                        child: AutoSizeText(
                           'ค้นหาบอร์ดเกม',
                           style: TextStyle(
                             fontFamily: 'tahomo',
@@ -113,7 +114,7 @@ class MianScreen extends StatelessWidget {
                       offset: Offset(34.0, 14.0),
                       child: const SizedBox(
                         width: 132.0,
-                        child: Text(
+                        child: AutoSizeText(
                           'สุ่มบอร์ดเกม',
                           style: TextStyle(
                             fontFamily: 'tahomo',

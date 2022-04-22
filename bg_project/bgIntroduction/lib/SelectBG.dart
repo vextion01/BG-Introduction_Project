@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -49,7 +50,7 @@ class _selectBGState extends State<selectBG> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xffe18721),
-        title: const Text('ผลลัพธ์จากการค้นหา',
+        title: const AutoSizeText('ผลลัพธ์จากการค้นหา',
             style: TextStyle(
               fontFamily: 'tahomo',
               fontSize: 24,

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -57,7 +58,7 @@ class InsertAttScreen extends StatelessWidget {
           Pinned.fromPins(
             Pin(size: 221.0, middle: 0.5036),
             Pin(size: 26.0, start: 25.0),
-            child: const Text('รายละเอียดของบอร์ดเกม',
+            child: const AutoSizeText('ค้นหาโดยคุณลักษณะ',
                 style: TextStyle(
                   fontFamily: 'tahomo',
                   fontSize: 24,
@@ -90,7 +91,7 @@ class _dropdownState extends State<dropdown> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             titlePadding: EdgeInsets.all(20),
-            title: const Text('กรุณาเลือกคุณลักษณะให้ครบ',
+            title: const AutoSizeText('กรุณาเลือกคุณลักษณะให้ครบ',
                 style: TextStyle(
                   fontSize: 22,
                   color: Colors.red,
@@ -104,7 +105,7 @@ class _dropdownState extends State<dropdown> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             titlePadding: EdgeInsets.all(20),
-            title: const Text('ไม่มีผลลัพธ์จากการค้นหา',
+            title: const AutoSizeText('ไม่มีผลลัพธ์จากการค้นหา',
                 style: TextStyle(
                   fontSize: 22,
                   color: Colors.red,
@@ -188,7 +189,7 @@ class _dropdownState extends State<dropdown> {
                 child: DropdownButton(
                   borderRadius: BorderRadius.circular(20),
                   dropdownColor: Colors.white, //
-                  hint: const Text(
+                  hint: const AutoSizeText(
                     "จำนวนผู้เล่น",
                     style: TextStyle(
                       fontSize: 18,
@@ -202,7 +203,7 @@ class _dropdownState extends State<dropdown> {
                   style: const TextStyle(color: Colors.black),
                   items: const [
                     DropdownMenuItem(
-                      child: Text(
+                      child: AutoSizeText(
                         "2-4",
                         style: TextStyle(
                           fontSize: 18,
@@ -211,7 +212,7 @@ class _dropdownState extends State<dropdown> {
                       value: 0,
                     ),
                     DropdownMenuItem(
-                      child: Text(
+                      child: AutoSizeText(
                         "5-7",
                         style: TextStyle(
                           fontSize: 18,
@@ -220,7 +221,7 @@ class _dropdownState extends State<dropdown> {
                       value: 1,
                     ),
                     DropdownMenuItem(
-                      child: Text(
+                      child: AutoSizeText(
                         "8 คนขึ้นไป",
                         style: TextStyle(
                           fontSize: 18,
@@ -248,7 +249,7 @@ class _dropdownState extends State<dropdown> {
                 child: DropdownButton(
                   borderRadius: BorderRadius.circular(20),
                   dropdownColor: Colors.white,
-                  hint: const Text(
+                  hint: const AutoSizeText(
                     "เวลาที่เล่น",
                     style: TextStyle(
                       fontSize: 18,
@@ -262,7 +263,7 @@ class _dropdownState extends State<dropdown> {
                   style: const TextStyle(color: Colors.black),
                   items: const [
                     DropdownMenuItem(
-                      child: Text(
+                      child: AutoSizeText(
                         "10-15",
                         style: TextStyle(
                           fontSize: 18,
@@ -271,7 +272,7 @@ class _dropdownState extends State<dropdown> {
                       value: 0,
                     ),
                     DropdownMenuItem(
-                      child: Text(
+                      child: AutoSizeText(
                         "20-35",
                         style: TextStyle(
                           fontSize: 18,
@@ -280,7 +281,7 @@ class _dropdownState extends State<dropdown> {
                       value: 1,
                     ),
                     DropdownMenuItem(
-                      child: Text(
+                      child: AutoSizeText(
                         "40-60",
                         style: TextStyle(
                           fontSize: 18,
@@ -289,7 +290,7 @@ class _dropdownState extends State<dropdown> {
                       value: 2,
                     ),
                     DropdownMenuItem(
-                      child: Text(
+                      child: AutoSizeText(
                         "80-120",
                         style: TextStyle(
                           fontSize: 18,
@@ -317,7 +318,7 @@ class _dropdownState extends State<dropdown> {
                 child: DropdownButton(
                   borderRadius: BorderRadius.circular(20),
                   dropdownColor: Colors.white,
-                  hint: const Text(
+                  hint: const AutoSizeText(
                     "ประเภทเกม",
                     style: TextStyle(
                       fontSize: 18,
@@ -331,7 +332,7 @@ class _dropdownState extends State<dropdown> {
                   style: const TextStyle(color: Colors.black),
                   items: const [
                     DropdownMenuItem(
-                      child: Text(
+                      child: AutoSizeText(
                         "Family",
                         style: TextStyle(
                           fontSize: 18,
@@ -340,7 +341,7 @@ class _dropdownState extends State<dropdown> {
                       value: 0,
                     ),
                     DropdownMenuItem(
-                      child: Text(
+                      child: AutoSizeText(
                         "Party",
                         style: TextStyle(
                           fontSize: 18,
@@ -349,7 +350,7 @@ class _dropdownState extends State<dropdown> {
                       value: 1,
                     ),
                     DropdownMenuItem(
-                      child: Text(
+                      child: AutoSizeText(
                         "Children",
                         style: TextStyle(
                           fontSize: 18,
@@ -358,7 +359,7 @@ class _dropdownState extends State<dropdown> {
                       value: 2,
                     ),
                     DropdownMenuItem(
-                      child: Text(
+                      child: AutoSizeText(
                         "Abstract",
                         style: TextStyle(
                           fontSize: 18,
@@ -367,7 +368,7 @@ class _dropdownState extends State<dropdown> {
                       value: 3,
                     ),
                     DropdownMenuItem(
-                      child: Text(
+                      child: AutoSizeText(
                         "Thematic",
                         style: TextStyle(
                           fontSize: 18,
@@ -376,7 +377,7 @@ class _dropdownState extends State<dropdown> {
                       value: 4,
                     ),
                     DropdownMenuItem(
-                      child: Text(
+                      child: AutoSizeText(
                         "Strategy",
                         style: TextStyle(
                           fontSize: 18,
@@ -419,7 +420,7 @@ class _dropdownState extends State<dropdown> {
                       }
                     });
                   },
-                  child: const Text(
+                  child: const AutoSizeText(
                     'ค้นหา',
                     style: TextStyle(
                       fontSize: 20,
@@ -432,7 +433,7 @@ class _dropdownState extends State<dropdown> {
                         MaterialStateProperty.all<Color>(Colors.black),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
                           side: BorderSide(width: 4, color: Colors.blue)),
                     ),
                   ),
