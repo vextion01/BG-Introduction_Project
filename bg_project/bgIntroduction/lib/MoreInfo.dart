@@ -16,13 +16,13 @@ class MoreInfo extends StatefulWidget {
 }
 
 class ResultRansominfo extends State<MoreInfo> {
-  String nameBG = 'nameBoardGame';
-  String linkBG = 'howToPlayLink';
-  String maxPYBG = 'maximumNumberOfPlayers';
-  String imageBG = 'boardgameimages';
-  String timeBG = 'playTimePerRound';
-  String typeBG = 'typeBoardGame';
-  String youtubeBG = 'youtubeLink';
+  String nameBG = '';
+  String linkBG = '';
+  String maxPYBG = '';
+  String imageBG = '';
+  String timeBG = '';
+  String typeBG = '';
+  String youtubeBG = '';
   int i = 0;
   getData() async {
     final collection =

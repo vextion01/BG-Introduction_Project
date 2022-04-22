@@ -15,13 +15,13 @@ class selectBG extends StatefulWidget {
 }
 
 class _selectBGState extends State<selectBG> {
-  static String nameBG = 'nameBG';
-  static String imageBG = 'boardgameimages';
-  static String linkBG = 'howToPlayLink';
-  static String maxPYBG = '1maximumNumberOfPlayers';
-  static String timeBG = 'playTimePerRound';
-  static String typeBG = 'typeBoardGame';
-  static String youtubeBG = 'youtubeLink';
+  static String nameBG = '';
+  static String imageBG = '';
+  static String linkBG = '';
+  static String maxPYBG = '';
+  static String timeBG = '';
+  static String typeBG = '';
+  static String youtubeBG = '';
 
   void getDataSelect(String value) async {
     print("first : Active ");
