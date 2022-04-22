@@ -271,14 +271,15 @@ class InfoScreen extends State<Resultinfo> {
                 Align(
                   child: SizedBox(
                     width: 300.0,
-                    height: 22.0,
+                    height: 30.0,
                     child: Text(widget.data!.get('nameBoardGame'),
                         style: const TextStyle(
                           fontFamily: 'tahomo',
-                          fontSize: 22,
+                          fontSize: 24,
                           color: Color(0xfffff5f5),
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.bold,
                         ),
+                        // textAlign: TextAlign.center,
                         softWrap: false,
                         textAlign: TextAlign.center),
                   ),
@@ -315,18 +316,17 @@ class InfoScreen extends State<Resultinfo> {
                   const Align(
                     alignment: Alignment(0.012, -1.0),
                     child: SizedBox(
-                      width: 155.0,
-                      height: 22.0,
-                      child: Text(
-                        'รายละเอียดบอร์ดเกม',
-                        style: TextStyle(
-                          fontFamily: 'tahomo',
-                          fontSize: 20,
-                          color: Color(0xfffff5f5),
-                          fontWeight: FontWeight.w500,
-                        ),
-                        softWrap: false,
-                      ),
+                      width: 300.0,
+                      height: 50.0,
+                      child: Text('รายละเอียดบอร์ดเกม',
+                          style: TextStyle(
+                            fontFamily: 'tahomo',
+                            fontSize: 24,
+                            color: Color(0xfffff5f5),
+                            fontWeight: FontWeight.bold,
+                          ),
+                          softWrap: false,
+                          textAlign: TextAlign.center),
                     ),
                   ),
                 ],

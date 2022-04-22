@@ -295,13 +295,13 @@ class ResultRansominfo extends State<MoreInfo> {
                 Align(
                   child: SizedBox(
                     width: 300.0,
-                    height: 22.0,
+                    height: 30.0,
                     child: Text(nameBG,
                         style: const TextStyle(
                           fontFamily: 'tahomo',
-                          fontSize: 22,
+                          fontSize: 24,
                           color: Color(0xfffff5f5),
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.bold,
                         ),
                         // textAlign: TextAlign.center,
                         softWrap: false,
@@ -340,14 +340,14 @@ class ResultRansominfo extends State<MoreInfo> {
                   const Align(
                     alignment: Alignment(0.012, -1.0),
                     child: SizedBox(
-                      width: 155.0,
-                      height: 22.0,
+                      width: 300.0,
+                      height: 50.0,
                       child: Text('รายละเอียดบอร์ดเกม',
                           style: TextStyle(
                             fontFamily: 'tahomo',
-                            fontSize: 20,
+                            fontSize: 24,
                             color: Color(0xfffff5f5),
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.bold,
                           ),
                           softWrap: false,
                           textAlign: TextAlign.center),
